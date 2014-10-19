@@ -19,11 +19,15 @@ import javax.swing.JTextField;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.*;
+import java.awt.Color;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class GameWindow extends JFrame {
 
@@ -33,13 +37,16 @@ public class GameWindow extends JFrame {
 	private Channel channel = null;
 	private ChannelFuture lastWriteFuture = null;
 	private EventLoopGroup group = new NioEventLoopGroup();
+
+	private Timer timer = new Timer();
+	private String cmd = "";
+
 	Bootstrap b = new Bootstrap();
 
 	static final String HOST = System.getProperty("host",
 			"IDEVUSR011.FRANKENI.COM");
 	static final int PORT = Integer
 			.parseInt(System.getProperty("port", "8998"));
-	private JTextField textField;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -57,6 +64,54 @@ public class GameWindow extends JFrame {
 	 * Create the frame.
 	 */
 	public GameWindow() {
+		getContentPane().setBackground(new Color(51, 153, 255));
+
+		PanelGame pg = new PanelGame();
+		pg.addKeyListener(new KeyAdapter() {
+
+			public void keyPressed(KeyEvent arg0) {
+
+				int keycode = arg0.getKeyCode();
+
+				System.out.println("" + keycode);
+
+				if (keycode < 37 || keycode > 40)
+					return;
+
+				cmd = "MOVE:" + gameClientHandler.game.getGameid() + ":"
+						+ keycode + "\r\n";
+
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						sendMessage();
+					}
+				});
+
+				/*
+				 * class KeyPressTask extends TimerTask { private int keycode;
+				 * 
+				 * public KeyPressTask(int code) { keycode = code; }
+				 * 
+				 * public void run() { cmd = "MOVE:" +
+				 * gameClientHandler.game.getGameid() + ":" + keycode + "\r\n";
+				 * 
+				 * // EventQueue.invokeLater(new Runnable() { // public void
+				 * run() { sendMessage();
+				 * 
+				 * 
+				 * // } // }); timer.schedule(this, 200); }
+				 * 
+				 * }
+				 * 
+				 * KeyPressTask tt = new KeyPressTask(keycode);
+				 * timer.schedule(tt, 200);
+				 */
+			}
+
+		});
+
+		this.getContentPane().add(pg);
+		pg.requestFocusInWindow();
 
 		b.group(group).channel(NioSocketChannel.class)
 				.handler(new gameClientInitializer(this));
@@ -65,11 +120,12 @@ public class GameWindow extends JFrame {
 
 		try {
 			channel = b.connect(HOST, PORT).sync().channel();
+			lastWriteFuture = channel.writeAndFlush("NEWGAME\r\n");
 
 		} catch (Exception e) {
-			 e.printStackTrace();
-			 return;
-		} 
+			e.printStackTrace();
+			return;
+		}
 
 		addWindowListener(new WindowAdapter() {
 			@Override
@@ -91,36 +147,24 @@ public class GameWindow extends JFrame {
 		});
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(10, 10, 1075, 700);
+		setBounds(10, 10, 1200, 800);
+	}
 
-		JPanel panel = new JPanel();
-		getContentPane().add(panel, BorderLayout.NORTH);
+	public void initialGame() {
+		setBounds(200, 100, gameClientHandler.game.getWidth(),
+				gameClientHandler.game.getHeight());
 
-		JButton btnSendMessage = new JButton("send message");
-		btnSendMessage.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		repaint();
 
-				if (channel != null) {
-					
-					lastWriteFuture = channel.writeAndFlush("NEWGAME\r\n");
-
-				}
-
-			}
-		});
-		panel.add(btnSendMessage);
-		
-		textField = new JTextField();
-		getContentPane().add(textField, BorderLayout.CENTER);
-		textField.setColumns(10);
 	}
 	
 	
-	public void updateText(String t)
-	{
-		textField.setText(t);
-		
-		
+	
+
+	public void sendMessage() {
+
+		channel.writeAndFlush(cmd);
+
 	}
 
 }
