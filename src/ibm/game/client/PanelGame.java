@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
@@ -15,12 +16,17 @@ import javax.swing.*;
 
 public class PanelGame extends JPanel implements MouseMotionListener {
 
+	
+	private Image img = new ImageIcon("").getImage(./resources/land.jpg");
 	public PanelGame() {
 		super();
 		setOpaque(false); // we don't paint all our bits
 		setLayout(new BorderLayout());
 		setBorder(BorderFactory.createLineBorder(Color.black));
-		setBackground(new Color(51, 153, 255));
+	//	setBackground(new Color(51, 153, 255));
+		
+		
+		
 		addMouseMotionListener(this);
 	}
 
@@ -60,6 +66,8 @@ public class PanelGame extends JPanel implements MouseMotionListener {
 		 * g.fillOval(x,y,size.width-(2*x),size.height-(2*y)); x+=10; y+=10;
 		 * i++; }
 		 */
+		g.drawImage(img, 0, 0, gameClientHandler.game.getX(),gameClientHandler.game.getX(), null);
+		
 		g.setColor(Color.YELLOW);
 		int x = gameClientHandler.game.getX() - 10;
 		int y = gameClientHandler.game.getY() - 10;
