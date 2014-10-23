@@ -18,7 +18,7 @@ public class PanelGame extends JPanel implements MouseMotionListener {
 
 	
 	private Image img = new ImageIcon("./resources/land.jpg").getImage();
-	private Image imgTank = null;//this.getToolkit().getImage("./resources/tank0.jpg");
+	public Image imgTank = null;//this.getToolkit().getImage("./resources/tank0.jpg");
 	public PanelGame() {
 		super();
 		setOpaque(false); // we don't paint all our bits
@@ -26,13 +26,7 @@ public class PanelGame extends JPanel implements MouseMotionListener {
 		setBorder(BorderFactory.createLineBorder(Color.black));
 	//	setBackground(new Color(51, 153, 255));
 		
-		int angle = gameClientHandler.game.getAngle();
-		int i = angle % 360 / 10;
-		if (i<0) i += 36;
 		
-		
-		
-		imgTank = this.getToolkit().getImage("./resources/tank" + i + ".jpg");
 		
 		addMouseMotionListener(this);
 	}
@@ -75,7 +69,7 @@ public class PanelGame extends JPanel implements MouseMotionListener {
 		 */
 		g.drawImage(img, 0, 0, gameClientHandler.game.getWidth(),gameClientHandler.game.getHeight(), null);
 		
-		g.setColor(Color.YELLOW);
+		//g.setColor(Color.YELLOW);
 		int x = gameClientHandler.game.getX() - 20;
 		int y = gameClientHandler.game.getY() - 15;
 

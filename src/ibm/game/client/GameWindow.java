@@ -40,6 +40,8 @@ public class GameWindow extends JFrame {
 
 	private Timer timer = new Timer();
 	private String cmd = "";
+	
+	PanelGame pg = new PanelGame();
 
 	Bootstrap b = new Bootstrap();
 
@@ -66,7 +68,7 @@ public class GameWindow extends JFrame {
 	public GameWindow() {
 		getContentPane().setBackground(new Color(51, 153, 255));
 
-		PanelGame pg = new PanelGame();
+		
 		pg.addKeyListener(new KeyAdapter() {
 
 			public void keyPressed(KeyEvent arg0) {
@@ -154,7 +156,21 @@ public class GameWindow extends JFrame {
 		setBounds(200, 100, gameClientHandler.game.getWidth(),
 				gameClientHandler.game.getHeight());
 
+		getTankImageForMain();
+		
 		repaint();
+
+	}
+	
+	
+	
+	public void getTankImageForMain() {
+
+		int angle = gameClientHandler.game.getAngle();
+		int i = angle % 360 / 10;
+		if (i<0) i += 36;
+		pg.imgTank = pg.getToolkit().getImage("./resources/tank" + i + ".jpg");	
+		
 
 	}
 	

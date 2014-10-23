@@ -35,6 +35,7 @@ public class gameClientHandler extends SimpleChannelInboundHandler<String> {
 	    		String[] po = msgs[4].split(",");
 	    		game.setX(Integer.parseInt(po[0]));
 	    		game.setY(Integer.parseInt(po[1]));
+	    		game.setAngle(Integer.parseInt(msgs[5]));
 	    		
 	    		EventQueue.invokeLater(new Runnable() {
 					public void run() {
@@ -76,9 +77,12 @@ public class gameClientHandler extends SimpleChannelInboundHandler<String> {
             	
 	    		int newAngle = Integer.parseInt(msgs[1]);
 	    	    game.setAngle(newAngle);
+	    	    
 	    		
 	    		EventQueue.invokeLater(new Runnable() {
 					public void run() {
+						
+					gw.getTankImageForMain();
 					gw.repaint();
 					}
 				});
