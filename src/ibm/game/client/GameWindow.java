@@ -66,7 +66,7 @@ public class GameWindow extends JFrame {
 	 * Create the frame.
 	 */
 	public GameWindow() {
-		getContentPane().setBackground(new Color(51, 153, 255));
+	//	getContentPane().setBackground(new Color(51, 153, 255));
 
 		
 		pg.addKeyListener(new KeyAdapter() {
@@ -169,7 +169,7 @@ public class GameWindow extends JFrame {
 		int angle = gameClientHandler.game.getAngle();
 		int i = angle % 360 / 10;
 		if (i<0) i += 36;
-		pg.imgTank = pg.getToolkit().getImage("./resources/tank" + i + ".jpg");	
+		pg.imgTank = pg.tanks[i];	
 		
 
 	}

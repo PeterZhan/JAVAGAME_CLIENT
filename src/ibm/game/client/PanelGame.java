@@ -9,21 +9,50 @@ import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.TimerTask;
 import java.util.Timer;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class PanelGame extends JPanel implements MouseMotionListener {
 
 	
 	private Image img = new ImageIcon("./resources/land.jpg").getImage();
+	
+	final static int MaxDiv = 36;
+	
+	public BufferedImage[] tanks =  new BufferedImage[MaxDiv];
+	
+	
 	public Image imgTank = null;//this.getToolkit().getImage("./resources/tank0.jpg");
 	public PanelGame() {
 		super();
 		setOpaque(false); // we don't paint all our bits
 		setLayout(new BorderLayout());
 		setBorder(BorderFactory.createLineBorder(Color.black));
+		
+		for (int i=0; i< MaxDiv; i++)
+		{
+			try{
+			    tanks[i] = ImageIO.read(new File("./resources/tank" + i + ".JPG"));
+			}catch(Exception e) 
+			{
+				e.printStackTrace();
+			}
+			
+			
+			
+			
+			
+		}
+		
+		
+		
+		
+		
 	//	setBackground(new Color(51, 153, 255));
 		
 		
