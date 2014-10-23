@@ -12,6 +12,16 @@ public class AGameSession {
 	int x;
 	int y;
 	
+	int angle = 0;
+	
+	public int getAngle() {
+		return angle;
+	}
+
+	public void setAngle(int angle) {
+		this.angle = angle;
+	}
+
 	public int getX() {
 		return x;
 	}
