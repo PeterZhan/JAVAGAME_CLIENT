@@ -1,4 +1,4 @@
-package ibm.game.client;
+package ibm.game.client; 
 
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelInitializer;

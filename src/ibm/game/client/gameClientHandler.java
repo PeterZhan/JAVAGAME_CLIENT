@@ -1,6 +1,6 @@
 package ibm.game.client;
 
-import java.awt.EventQueue;
+import java.awt.EventQueue; 
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -69,7 +69,28 @@ public class gameClientHandler extends SimpleChannelInboundHandler<String> {
 	    		
 	    		
 	    		
+	    		break;	
+	    		
+            case "ANGLE":
+	    		
+            	
+	    		int newAngle = Integer.parseInt(msgs[1]);
+	    	    game.setAngle(newAngle);
+	    		
+	    		EventQueue.invokeLater(new Runnable() {
+					public void run() {
+					gw.repaint();
+					}
+				});
+	    		
+	    		
+	    		
+	    		
+	    		
+	    		
+	    		
 	    		break;		
+	    		
 	    		
 	    	
 	    	default:
