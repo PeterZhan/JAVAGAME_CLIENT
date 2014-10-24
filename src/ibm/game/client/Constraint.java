@@ -20,7 +20,7 @@ class Constraint {
 		this.x1 = Integer.parseInt(x1);
 		this.y1 = Integer.parseInt(y1);
 
-	}
+	} 
 
 	public boolean inside(int x, int y) {
 

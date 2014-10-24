@@ -39,8 +39,9 @@ public class GameWindow extends JFrame implements ActionListener {
 	/**
 	 * Launch the application.
 	 */
+	
 
-	static final long serialVersionUID = 2343534;
+	//static final long serialVersionUID = 2343534;
 	private Channel channel = null;
 	private ChannelFuture lastWriteFuture = null;
 	private EventLoopGroup group = new NioEventLoopGroup();
