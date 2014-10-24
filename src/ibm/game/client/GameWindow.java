@@ -27,6 +27,7 @@ import javax.swing.Timer;
 
 
 
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
@@ -189,22 +190,44 @@ public class GameWindow extends JFrame implements ActionListener {
 
 		// Start the connection attempt.
 		DlgMain dialog = new DlgMain(this, true);
-		
-	//	System.out.println(dialog.getOwner().getClass());
-		
 		dialog.setTitle("Tank Game");
 		dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		
-		dialog.setVisible(true);
 		
-				
+		
+		DlgList dialogList = new DlgList();
+		dialogList.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		
+	//	System.out.println(dialog.getOwner().getClass());
+		
 		
 		
 		
 
 		try {
 			channel = b.connect(HOST, PORT).sync().channel();
-			lastWriteFuture = channel.writeAndFlush("NEWGAME\r\n");
+			
+			
+			dialog.setVisible(true);
+			
+			if (dialog.gameWay.equals("NEW"))
+				gameClientHandler.game.ID = 1;
+			else
+				gameClientHandler.game.ID = 2;
+			
+			if (gameClientHandler.game.ID == 1)
+				lastWriteFuture = channel.writeAndFlush("NEWGAME\r\n");
+			else 
+			{
+				
+				dialogList.putAllGames();
+				dialogList.setVisible(true);
+				
+				
+				
+				
+				
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -284,6 +307,8 @@ public class GameWindow extends JFrame implements ActionListener {
 		
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+		
+		this.setTitle("Tank Game ID: " + gameClientHandler.game.getGameid());
 		
 		repaint();
 

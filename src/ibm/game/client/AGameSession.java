@@ -1,11 +1,16 @@
 package ibm.game.client;
 import java.util.*;
+
 import io.netty.channel.Channel;
 
 public class AGameSession {
     	
 	private String gameid;
+	public  static int ID;
 	
+	public static String[] namelist = new String[0];
+
+
 	private int width;
 	private int height;
 	
@@ -14,8 +19,8 @@ public class AGameSession {
 	
 	int angle = 0;
 	
-	Constraint c1;
-	Constraint c2;
+	Constraint c1 = new Constraint(0,0,0,0);
+	Constraint c2 = new Constraint(0,0,0,0);;
 	
 	
 	public int getAngle() {

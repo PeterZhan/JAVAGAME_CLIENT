@@ -100,7 +100,32 @@ public class gameClientHandler extends SimpleChannelInboundHandler<String> {
 	    		
 	    		
 	    		
+	    		break;	
+	    		
+	    		
+             case "GL":
+	    		
+            	 if (msgs.length > 1)
+            	 {
+            		 AGameSession.namelist = new String[msgs.length-1];
+            		 
+            		 for(int i=1; i<msgs.length; i++)
+            			 AGameSession.namelist[i-1] = msgs[i];
+            		 
+            		 
+            		 
+            		 
+            		 
+            	 }
+	    		
+	    		
+	    		
+	    		
+	    		
+	    		
+	    		
 	    		break;		
+	    		
 	    		
 	    		
 	    	

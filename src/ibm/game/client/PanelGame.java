@@ -22,7 +22,7 @@ import javax.swing.*;
 public class PanelGame extends JPanel implements MouseMotionListener {
 
 	
-	private Image img = new ImageIcon("./resources/land.jpg").getImage();
+	private Image img = null;//ImageIO.read(new File("./resources/land.jpg")); //new ImageIcon("./resources/land.jpg").getImage();
 	
 	final static int MaxDiv = 36;
 	
@@ -35,6 +35,14 @@ public class PanelGame extends JPanel implements MouseMotionListener {
 		setOpaque(false); // we don't paint all our bits
 		setLayout(new BorderLayout());
 		setBorder(BorderFactory.createLineBorder(Color.black));
+		
+		try{
+		   img = ImageIO.read(new File("./resources/land.jpg"));
+		}catch(Exception e)
+		{
+		   e.printStackTrace();	
+		}
+		
 		
 		for (int i=0; i< MaxDiv; i++)
 		{
@@ -106,6 +114,7 @@ public class PanelGame extends JPanel implements MouseMotionListener {
 		
 		g.setColor(Color.red);		
 		
+		 
 		g.drawRect(gameClientHandler.game.getC1().getX0()-20, gameClientHandler.game.getC1().getY0()-20,
 				gameClientHandler.game.getC1().getWidth()+40, gameClientHandler.game.getC1().getHeight()+40);
 		
