@@ -22,12 +22,6 @@ import javax.swing.JDialog;
 import javax.swing.JTextField;
 import javax.swing.Timer;
 
-
-
-
-
-
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
@@ -45,7 +39,7 @@ public class GameWindow extends JFrame implements ActionListener {
 	/**
 	 * Launch the application.
 	 */
-	
+
 	static final long serialVersionUID = 2343534;
 	private Channel channel = null;
 	private ChannelFuture lastWriteFuture = null;
@@ -53,11 +47,11 @@ public class GameWindow extends JFrame implements ActionListener {
 
 	private Timer timer = null;
 	private String cmd = "";
-	
+
 	public static Key ks = new Key();
-	
-//	public Timer keyTimer = new Timer();
-	
+
+	// public Timer keyTimer = new Timer();
+
 	PanelGame pg = new PanelGame();
 
 	Bootstrap b = new Bootstrap();
@@ -70,7 +64,7 @@ public class GameWindow extends JFrame implements ActionListener {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				
+
 				GameWindow frame = new GameWindow();
 
 				frame.setVisible(true);
@@ -83,9 +77,8 @@ public class GameWindow extends JFrame implements ActionListener {
 	 * Create the frame.
 	 */
 	public GameWindow() {
-	//	getContentPane().setBackground(new Color(51, 153, 255));
+		// getContentPane().setBackground(new Color(51, 153, 255));
 
-		
 		pg.addKeyListener(new KeyAdapter() {
 
 			public void keyPressed(KeyEvent arg0) {
@@ -93,23 +86,18 @@ public class GameWindow extends JFrame implements ActionListener {
 				int keycode = arg0.getKeyCode();
 
 				ks.setKeypressed(keycode);
-				
-				
+
 				System.out.println("" + keycode);
 
-				
 				/*
-				if (keycode != 32 && (keycode < 37 || keycode > 40))
-					return;
-
-				cmd = "MOVE:" + gameClientHandler.game.getGameid() + ":"
-						+ keycode + "\r\n";
-
-				EventQueue.invokeLater(new Runnable() {
-					public void run() {
-						sendMessage();
-					}
-				});*/
+				 * if (keycode != 32 && (keycode < 37 || keycode > 40)) return;
+				 * 
+				 * cmd = "MOVE:" + gameClientHandler.game.getGameid() + ":" +
+				 * keycode + "\r\n";
+				 * 
+				 * EventQueue.invokeLater(new Runnable() { public void run() {
+				 * sendMessage(); } });
+				 */
 
 				/*
 				 * class KeyPressTask extends TimerTask { private int keycode;
@@ -131,28 +119,24 @@ public class GameWindow extends JFrame implements ActionListener {
 				 * timer.schedule(tt, 200);
 				 */
 			}
-			
+
 			public void keyReleased(KeyEvent arg0) {
 
 				int keycode = arg0.getKeyCode();
 
 				System.out.println("" + keycode);
-				
+
 				ks.setKeyreleased(keycode);
 
-				
 				/*
-				if (keycode != 32 && (keycode < 37 || keycode > 40))
-					return;
-
-				cmd = "MOVE:" + gameClientHandler.game.getGameid() + ":"
-						+ keycode + "\r\n";
-
-				EventQueue.invokeLater(new Runnable() {
-					public void run() {
-						sendMessage();
-					}
-				});*/
+				 * if (keycode != 32 && (keycode < 37 || keycode > 40)) return;
+				 * 
+				 * cmd = "MOVE:" + gameClientHandler.game.getGameid() + ":" +
+				 * keycode + "\r\n";
+				 * 
+				 * EventQueue.invokeLater(new Runnable() { public void run() {
+				 * sendMessage(); } });
+				 */
 
 				/*
 				 * class KeyPressTask extends TimerTask { private int keycode;
@@ -176,11 +160,6 @@ public class GameWindow extends JFrame implements ActionListener {
 			}
 
 		});
-		
-	
-		
-		
-		
 
 		this.getContentPane().add(pg);
 		pg.requestFocusInWindow();
@@ -192,41 +171,29 @@ public class GameWindow extends JFrame implements ActionListener {
 		DlgMain dialog = new DlgMain(this, true);
 		dialog.setTitle("Tank Game");
 		dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		
-		
-		
+
 		DlgList dialogList = new DlgList();
 		dialogList.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		
-	//	System.out.println(dialog.getOwner().getClass());
-		
-		
-		
-		
+
+		// System.out.println(dialog.getOwner().getClass());
 
 		try {
 			channel = b.connect(HOST, PORT).sync().channel();
-			
-			
+
 			dialog.setVisible(true);
-			
+
 			if (dialog.gameWay.equals("NEW"))
 				gameClientHandler.game.ID = 1;
 			else
 				gameClientHandler.game.ID = 2;
-			
+
 			if (gameClientHandler.game.ID == 1)
 				lastWriteFuture = channel.writeAndFlush("NEWGAME\r\n");
-			else 
-			{
-				
+			else {
+
 				dialogList.putAllGames();
 				dialogList.setVisible(true);
-				
-				
-				
-				
-				
+
 			}
 
 		} catch (Exception e) {
@@ -254,80 +221,59 @@ public class GameWindow extends JFrame implements ActionListener {
 		});
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//setBounds(10, 10, 1200, 800);
-		
-		
-	//	keyTimer.schedule(new TimerTask(), time);
-		
-		
+		// setBounds(10, 10, 1200, 800);
+
+		// keyTimer.schedule(new TimerTask(), time);
+
 		timer = new Timer(50, this);
-		
+
 		timer.start();
-		
-		
-		
-		
+
 	}
-	
-	
-	
+
 	public void actionPerformed(ActionEvent evt) {
-		
-		final int[] keycodes = {37,38,39,40};
-		
-		for (int i=0; i<keycodes.length; i++)
-		{
-			
+
+		final int[] keycodes = { 37, 38, 39, 40 };
+
+		for (int i = 0; i < keycodes.length; i++) {
+
 			if (ks.getKeyPressed(keycodes[i])) {
-				
+
 				cmd = "MOVE:" + gameClientHandler.game.getGameid() + ":"
 						+ keycodes[i] + "\r\n";
 				sendMessage();
-				
+
 			}
-			
-			
-			
-			
-			
+
 		}
-		
-		
-		
-		
-		
-        
-    }
+
+	}
 
 	public void initialGame() {
 		setBounds(200, 100, gameClientHandler.game.getWidth(),
 				gameClientHandler.game.getHeight());
 
 		getTankImageForMain();
-		
+
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
-		
+		this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height
+				/ 2 - this.getSize().height / 2);
+
 		this.setTitle("Tank Game ID: " + gameClientHandler.game.getGameid());
-		
+
 		repaint();
 
 	}
-	
-	
-	
+
 	public void getTankImageForMain() {
 
 		int angle = gameClientHandler.game.getAngle();
 		int i = angle % 360 / 10;
-		if (i<0) i += 36;
-		pg.imgTank = pg.tanks[i];	
-		
+		if (i < 0)
+			i += 36;
+		pg.imgTank = pg.tanks[i];
 
 	}
-	
-	
-	
 
 	public void sendMessage() {
 

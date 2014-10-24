@@ -1,28 +1,27 @@
 package ibm.game.client;
+
 import java.util.*;
 
 import io.netty.channel.Channel;
 
 public class AGameSession {
-    	
-	private String gameid;
-	public  static int ID;
-	
-	public static String[] namelist = new String[0];
 
+	private String gameid;
+	public static int ID;
+
+	public static String[] namelist = new String[0];
 
 	private int width;
 	private int height;
-	
+
 	int x;
 	int y;
-	
+
 	int angle = 0;
-	
-	Constraint c1 = new Constraint(0,0,0,0);
-	Constraint c2 = new Constraint(0,0,0,0);;
-	
-	
+
+	Constraint c1 = new Constraint(0, 0, 0, 0);
+	Constraint c2 = new Constraint(0, 0, 0, 0);
+
 	public int getAngle() {
 		return angle;
 	}
@@ -63,7 +62,7 @@ public class AGameSession {
 		this.y = y;
 	}
 
-	public synchronized int  getWidth() {
+	public synchronized int getWidth() {
 		return width;
 	}
 
@@ -79,29 +78,16 @@ public class AGameSession {
 		this.height = height;
 	}
 
-	
-		
-	
-
-	public synchronized String  getGameid()  {
+	public synchronized String getGameid() {
 		return gameid;
 	}
 
-	public AGameSession()
-	{
-	
-			
-	}
+	public AGameSession() {
 
+	}
 
 	public synchronized void setGameid(String gameid) {
 		this.gameid = gameid;
 	}
-	
-	
-	
-	
-	
-	
 
 }

@@ -21,52 +21,40 @@ import javax.swing.*;
 
 public class PanelGame extends JPanel implements MouseMotionListener {
 
-	
-	private Image img = null;//ImageIO.read(new File("./resources/land.jpg")); //new ImageIcon("./resources/land.jpg").getImage();
-	
+	private Image img = null;// ImageIO.read(new File("./resources/land.jpg"));
+								// //new
+								// ImageIcon("./resources/land.jpg").getImage();
+
 	final static int MaxDiv = 36;
-	
-	public BufferedImage[] tanks =  new BufferedImage[MaxDiv];
-	
-	
-	public Image imgTank = null;//this.getToolkit().getImage("./resources/tank0.jpg");
+
+	public BufferedImage[] tanks = new BufferedImage[MaxDiv];
+
+	public Image imgTank = null;// this.getToolkit().getImage("./resources/tank0.jpg");
+
 	public PanelGame() {
 		super();
 		setOpaque(false); // we don't paint all our bits
 		setLayout(new BorderLayout());
 		setBorder(BorderFactory.createLineBorder(Color.black));
-		
-		try{
-		   img = ImageIO.read(new File("./resources/land.jpg"));
-		}catch(Exception e)
-		{
-		   e.printStackTrace();	
+
+		try {
+			img = ImageIO.read(new File("./resources/land.jpg"));
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		
-		
-		for (int i=0; i< MaxDiv; i++)
-		{
-			try{
-			    tanks[i] = ImageIO.read(new File("./resources/tank" + i + ".JPG"));
-			}catch(Exception e) 
-			{
+
+		for (int i = 0; i < MaxDiv; i++) {
+			try {
+				tanks[i] = ImageIO.read(new File("./resources/tank" + i
+						+ ".JPG"));
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
-			
-			
-			
-			
+
 		}
-		
-		
-		
-		
-		
-	//	setBackground(new Color(51, 153, 255));
-		
-		
-		
+
+		// setBackground(new Color(51, 153, 255));
+
 		addMouseMotionListener(this);
 	}
 
@@ -106,27 +94,26 @@ public class PanelGame extends JPanel implements MouseMotionListener {
 		 * g.fillOval(x,y,size.width-(2*x),size.height-(2*y)); x+=10; y+=10;
 		 * i++; }
 		 */
-		
-		
-		
-		g.drawImage(img, 0, 0, gameClientHandler.game.getWidth(),gameClientHandler.game.getHeight(), null);
-		
-		
-		g.setColor(Color.red);		
-		
-		 
-		g.drawRect(gameClientHandler.game.getC1().getX0()-20, gameClientHandler.game.getC1().getY0()-20,
-				gameClientHandler.game.getC1().getWidth()+40, gameClientHandler.game.getC1().getHeight()+40);
-		
-		g.drawRect(gameClientHandler.game.getC2().getX0()-20, gameClientHandler.game.getC2().getY0()-20,
-				gameClientHandler.game.getC2().getWidth()+40, gameClientHandler.game.getC2().getHeight()+40);
-		//g.setColor(Color.YELLOW);
+
+		g.drawImage(img, 0, 0, gameClientHandler.game.getWidth(),
+				gameClientHandler.game.getHeight(), null);
+
+		g.setColor(Color.red);
+
+		g.drawRect(gameClientHandler.game.getC1().getX0() - 20,
+				gameClientHandler.game.getC1().getY0() - 20,
+				gameClientHandler.game.getC1().getWidth() + 40,
+				gameClientHandler.game.getC1().getHeight() + 40);
+
+		g.drawRect(gameClientHandler.game.getC2().getX0() - 20,
+				gameClientHandler.game.getC2().getY0() - 20,
+				gameClientHandler.game.getC2().getWidth() + 40,
+				gameClientHandler.game.getC2().getHeight() + 40);
+		// g.setColor(Color.YELLOW);
 		int x = gameClientHandler.game.getX() - 20;
 		int y = gameClientHandler.game.getY() - 15;
 
-				
 		g.drawImage(imgTank, x, y, 40, 30, null);
-		
 
 	}
 
