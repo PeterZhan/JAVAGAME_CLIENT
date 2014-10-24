@@ -70,12 +70,6 @@ public class GameWindow extends JFrame implements ActionListener {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				
-				
-				
-				
-				
-				
-
 				GameWindow frame = new GameWindow();
 
 				frame.setVisible(true);
@@ -196,7 +190,7 @@ public class GameWindow extends JFrame implements ActionListener {
 		// Start the connection attempt.
 		DlgMain dialog = new DlgMain(this, true);
 		
-		System.out.println(dialog.getOwner().getClass());
+	//	System.out.println(dialog.getOwner().getClass());
 		
 		dialog.setTitle("Tank Game");
 		dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
