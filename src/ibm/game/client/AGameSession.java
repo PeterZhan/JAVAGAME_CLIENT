@@ -14,8 +14,28 @@ public class AGameSession {
 	
 	int angle = 0;
 	
+	Constraint c1;
+	Constraint c2;
+	
+	
 	public int getAngle() {
 		return angle;
+	}
+
+	public Constraint getC1() {
+		return c1;
+	}
+
+	public void setC1(Constraint c1) {
+		this.c1 = c1;
+	}
+
+	public Constraint getC2() {
+		return c2;
+	}
+
+	public void setC2(Constraint c2) {
+		this.c2 = c2;
 	}
 
 	public void setAngle(int angle) {

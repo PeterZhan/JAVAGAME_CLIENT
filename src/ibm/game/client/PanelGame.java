@@ -1,11 +1,13 @@
 package ibm.game.client;
 
+import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Stroke;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
@@ -96,8 +98,19 @@ public class PanelGame extends JPanel implements MouseMotionListener {
 		 * g.fillOval(x,y,size.width-(2*x),size.height-(2*y)); x+=10; y+=10;
 		 * i++; }
 		 */
+		
+		
+		
 		g.drawImage(img, 0, 0, gameClientHandler.game.getWidth(),gameClientHandler.game.getHeight(), null);
 		
+		
+		g.setColor(Color.red);		
+		
+		g.drawRect(gameClientHandler.game.getC1().getX0()-20, gameClientHandler.game.getC1().getY0()-20,
+				gameClientHandler.game.getC1().getWidth()+40, gameClientHandler.game.getC1().getHeight()+40);
+		
+		g.drawRect(gameClientHandler.game.getC2().getX0()-20, gameClientHandler.game.getC2().getY0()-20,
+				gameClientHandler.game.getC2().getWidth()+40, gameClientHandler.game.getC2().getHeight()+40);
 		//g.setColor(Color.YELLOW);
 		int x = gameClientHandler.game.getX() - 20;
 		int y = gameClientHandler.game.getY() - 15;

@@ -1,7 +1,10 @@
 package ibm.game.client;
 
 import java.awt.BorderLayout;
+import java.awt.Dialog;
+import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -15,7 +18,14 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JTextField;
+import javax.swing.Timer;
+
+
+
+
+
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -29,17 +39,23 @@ import java.awt.Color;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class GameWindow extends JFrame {
+public class GameWindow extends JFrame implements ActionListener {
 
 	/**
 	 * Launch the application.
 	 */
+	
+	static final long serialVersionUID = 2343534;
 	private Channel channel = null;
 	private ChannelFuture lastWriteFuture = null;
 	private EventLoopGroup group = new NioEventLoopGroup();
 
-	private Timer timer = new Timer();
+	private Timer timer = null;
 	private String cmd = "";
+	
+	public static Key ks = new Key();
+	
+//	public Timer keyTimer = new Timer();
 	
 	PanelGame pg = new PanelGame();
 
@@ -53,6 +69,12 @@ public class GameWindow extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
+				
+				
+				
+				
+				
+				
 
 				GameWindow frame = new GameWindow();
 
@@ -75,9 +97,14 @@ public class GameWindow extends JFrame {
 
 				int keycode = arg0.getKeyCode();
 
+				ks.setKeypressed(keycode);
+				
+				
 				System.out.println("" + keycode);
 
-				if (keycode < 37 || keycode > 40)
+				
+				/*
+				if (keycode != 32 && (keycode < 37 || keycode > 40))
 					return;
 
 				cmd = "MOVE:" + gameClientHandler.game.getGameid() + ":"
@@ -87,7 +114,50 @@ public class GameWindow extends JFrame {
 					public void run() {
 						sendMessage();
 					}
-				});
+				});*/
+
+				/*
+				 * class KeyPressTask extends TimerTask { private int keycode;
+				 * 
+				 * public KeyPressTask(int code) { keycode = code; }
+				 * 
+				 * public void run() { cmd = "MOVE:" +
+				 * gameClientHandler.game.getGameid() + ":" + keycode + "\r\n";
+				 * 
+				 * // EventQueue.invokeLater(new Runnable() { // public void
+				 * run() { sendMessage();
+				 * 
+				 * 
+				 * // } // }); timer.schedule(this, 200); }
+				 * 
+				 * }
+				 * 
+				 * KeyPressTask tt = new KeyPressTask(keycode);
+				 * timer.schedule(tt, 200);
+				 */
+			}
+			
+			public void keyReleased(KeyEvent arg0) {
+
+				int keycode = arg0.getKeyCode();
+
+				System.out.println("" + keycode);
+				
+				ks.setKeyreleased(keycode);
+
+				
+				/*
+				if (keycode != 32 && (keycode < 37 || keycode > 40))
+					return;
+
+				cmd = "MOVE:" + gameClientHandler.game.getGameid() + ":"
+						+ keycode + "\r\n";
+
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						sendMessage();
+					}
+				});*/
 
 				/*
 				 * class KeyPressTask extends TimerTask { private int keycode;
@@ -111,6 +181,11 @@ public class GameWindow extends JFrame {
 			}
 
 		});
+		
+	
+		
+		
+		
 
 		this.getContentPane().add(pg);
 		pg.requestFocusInWindow();
@@ -119,6 +194,19 @@ public class GameWindow extends JFrame {
 				.handler(new gameClientInitializer(this));
 
 		// Start the connection attempt.
+		DlgMain dialog = new DlgMain(this, true);
+		
+		System.out.println(dialog.getOwner().getClass());
+		
+		dialog.setTitle("Tank Game");
+		dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		
+		dialog.setVisible(true);
+		
+				
+		
+		
+		
 
 		try {
 			channel = b.connect(HOST, PORT).sync().channel();
@@ -149,14 +237,59 @@ public class GameWindow extends JFrame {
 		});
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(10, 10, 1200, 800);
+		//setBounds(10, 10, 1200, 800);
+		
+		
+	//	keyTimer.schedule(new TimerTask(), time);
+		
+		
+		timer = new Timer(50, this);
+		
+		timer.start();
+		
+		
+		
+		
 	}
+	
+	
+	
+	public void actionPerformed(ActionEvent evt) {
+		
+		final int[] keycodes = {37,38,39,40};
+		
+		for (int i=0; i<keycodes.length; i++)
+		{
+			
+			if (ks.getKeyPressed(keycodes[i])) {
+				
+				cmd = "MOVE:" + gameClientHandler.game.getGameid() + ":"
+						+ keycodes[i] + "\r\n";
+				sendMessage();
+				
+			}
+			
+			
+			
+			
+			
+		}
+		
+		
+		
+		
+		
+        
+    }
 
 	public void initialGame() {
 		setBounds(200, 100, gameClientHandler.game.getWidth(),
 				gameClientHandler.game.getHeight());
 
 		getTankImageForMain();
+		
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
 		
 		repaint();
 

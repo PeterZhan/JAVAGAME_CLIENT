@@ -37,6 +37,13 @@ public class gameClientHandler extends SimpleChannelInboundHandler<String> {
 	    		game.setY(Integer.parseInt(po[1]));
 	    		game.setAngle(Integer.parseInt(msgs[5]));
 	    		
+	    		
+	    		String[] xys = msgs[3].split(",");
+	    		game.setC1(new Constraint(xys[0], xys[1], xys[2], xys[3]));
+	    		game.setC2(new Constraint(xys[4], xys[5], xys[6], xys[7]));
+	    		
+	    		
+	    		
 	    		EventQueue.invokeLater(new Runnable() {
 					public void run() {
 					gw.initialGame();
