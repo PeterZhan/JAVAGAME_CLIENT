@@ -19,6 +19,7 @@ public class DlgList extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	JComboBox gameList;
+	String gameid= null;
 
 	/**
 	 * Launch the application.
@@ -67,6 +68,13 @@ public class DlgList extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("Select");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						gameid = (String)gameList.getSelectedItem();
+						setVisible(false);
+						
+					}
+				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);

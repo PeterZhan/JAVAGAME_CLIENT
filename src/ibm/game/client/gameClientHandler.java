@@ -25,6 +25,34 @@ public class gameClientHandler extends SimpleChannelInboundHandler<String> {
 		String cmd = msgs[0];
 
 		switch (cmd) {
+		case "NEWJOIN":
+			//game.setGameid(msgs[1]);
+			if (game.ID == 2)
+			{
+			String[] size = msgs[2].split(",");
+			game.setWidth(Integer.parseInt(size[0]));
+			game.setHeight(Integer.parseInt(size[1]));
+			String[] po = msgs[4].split(",");
+			
+			
+			game.setX2(Integer.parseInt(po[0]));
+			game.setY2(Integer.parseInt(po[1]));
+			game.setAngle2(Integer.parseInt(msgs[5]));
+
+			String[] xys = msgs[3].split(",");
+			game.setC1(new Constraint(xys[0], xys[1], xys[2], xys[3]));
+			game.setC2(new Constraint(xys[4], xys[5], xys[6], xys[7]));
+
+			EventQueue.invokeLater(new Runnable() {
+				public void run() {
+					gw.initialGame();
+				}
+			});
+			}
+			break;
+		
+		
+		
 		case "NEW":
 			game.setGameid(msgs[1]);
 			String[] size = msgs[2].split(",");

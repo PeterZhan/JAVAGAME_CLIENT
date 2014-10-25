@@ -76,17 +76,19 @@ public class DlgMain extends JDialog {
 		}
 
 		{
-			JRadioButton rdbtnJoinAnExisting = new JRadioButton(
+			if (AGameSession.namelist.length > 0){
+			  JRadioButton rdbtnJoinAnExisting = new JRadioButton(
 					"join an existing game");
-			rdbtnJoinAnExisting.addMouseListener(new MouseAdapter() {
+			  rdbtnJoinAnExisting.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 
 					gameWay = "JOIN";
 				}
-			});
+			  });
 			contentPanel.add(rdbtnJoinAnExisting);
 			group.add(rdbtnJoinAnExisting);
+			}
 
 		}
 		{

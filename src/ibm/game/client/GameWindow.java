@@ -169,18 +169,24 @@ public class GameWindow extends JFrame implements ActionListener {
 				.handler(new gameClientInitializer(this));
 
 		// Start the connection attempt.
-		DlgMain dialog = new DlgMain(this, true);
-		dialog.setTitle("Tank Game");
-		dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		
 
-		DlgList dialogList = new DlgList();
-		dialogList.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-
+		
 		// System.out.println(dialog.getOwner().getClass());
 
 		try {
 			channel = b.connect(HOST, PORT).sync().channel();
+            
+			Thread.sleep(300);
+            DlgMain dialog = new DlgMain(this, true);
+    		dialog.setTitle("Tank Game");
+    		dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+            
+            
+            DlgList dialogList = new DlgList();
+        	dialogList.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 
+            	
 			dialog.setVisible(true);
 
 			if (dialog.gameWay.equals("NEW"))
@@ -194,6 +200,11 @@ public class GameWindow extends JFrame implements ActionListener {
 
 				dialogList.putAllGames();
 				dialogList.setVisible(true);
+				
+				gameClientHandler.game.setGameid(dialogList.gameid);
+				
+				lastWriteFuture = channel.writeAndFlush("JOIN:" + gameClientHandler.game.getGameid() + "\r\n");
+				
 
 			}
 
