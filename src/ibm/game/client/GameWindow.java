@@ -276,6 +276,22 @@ public class GameWindow extends JFrame implements ActionListener {
 		repaint();
 
 	}
+	
+	public void initialGameForSec() {
+		setBounds(200, 100, gameClientHandler.game.getWidth(),
+				gameClientHandler.game.getHeight());
+
+		getTankImageForSec();
+
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height
+				/ 2 - this.getSize().height / 2);
+
+		this.setTitle("Tank Game ID: " + gameClientHandler.game.getGameid());
+
+		repaint();
+
+	}
 
 	public void getTankImageForMain() {
 
@@ -284,6 +300,19 @@ public class GameWindow extends JFrame implements ActionListener {
 		if (i < 0)
 			i += 36;
 		pg.imgTank = pg.tanks[i];
+	
+		
+	
+	}
+	
+	
+	public void getTankImageForSec() {
+	
+		int angle = gameClientHandler.game.getAngle2();
+		int i = angle % 360 / 10;
+		if (i < 0)
+			i += 36;
+		pg.imgTank2 = pg.tanks[i];
 
 	}
 

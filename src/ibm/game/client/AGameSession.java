@@ -23,7 +23,7 @@ public class AGameSession {
 	private int x2;
 	private int y2;
 	
-	private int angle2 = 0;
+	private int angle2 = 180;
 
 
 
