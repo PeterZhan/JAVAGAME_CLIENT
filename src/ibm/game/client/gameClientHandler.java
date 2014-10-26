@@ -51,7 +51,7 @@ public class gameClientHandler extends SimpleChannelInboundHandler<String>{
 			} 
 			if (game.ID == 1){
 				
-				gw.getTankImageForSec();
+				game.getTankImageForSec();
 				gw.repaint();
 				
 				
@@ -130,10 +130,11 @@ public class gameClientHandler extends SimpleChannelInboundHandler<String>{
 			if (part == 1)
 			{
 			  game.setAngle(newAngle);
+			  game.getTankImageForMain();
 			  EventQueue.invokeLater(new Runnable() {
 					public void run() {
 
-						gw.getTankImageForMain();
+						
 						gw.repaint();
 					}
 				});
@@ -142,10 +143,11 @@ public class gameClientHandler extends SimpleChannelInboundHandler<String>{
 			else
 			{
 			  game.setAngle2(newAngle);
+			  game.getTankImageForSec();
 			  EventQueue.invokeLater(new Runnable() {
 					public void run() {
 
-						gw.getTankImageForSec();
+						
 						gw.repaint();
 					}
 				});

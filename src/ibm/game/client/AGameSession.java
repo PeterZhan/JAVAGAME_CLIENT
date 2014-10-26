@@ -1,6 +1,11 @@
 package ibm.game.client;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.*;
+
+import javax.imageio.ImageIO;
 
 import io.netty.channel.Channel;
 
@@ -24,6 +29,28 @@ public class AGameSession {
 	private int y2;
 	
 	private int angle2 = 180;
+	
+	final static int MaxDiv = 36;
+	
+	public synchronized Image getImgTank() {
+		return imgTank;
+	}
+
+	public synchronized void setImgTank(Image imgTank) {
+		this.imgTank = imgTank;
+	}
+
+	public synchronized Image getImgTank2() {
+		return imgTank2;
+	}
+
+	public synchronized void setImgTank2(Image imgTank2) {
+		this.imgTank2 = imgTank2;
+	}
+
+	public BufferedImage[] tanks = new BufferedImage[MaxDiv];
+	public Image imgTank = null;// this.getToolkit().getImage("./resources/tank0.jpg");
+    public Image imgTank2 = null;
 
 
 
@@ -115,11 +142,44 @@ public class AGameSession {
 	}
 
 	public AGameSession() {
+		for (int i = 0; i < MaxDiv; i++) {
+			try {
+				tanks[i] = ImageIO.read(new File("./resources/tank" + i
+						+ ".png"));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		}
+		
+		
 
 	}
 
 	public synchronized void setGameid(String gameid) {
 		this.gameid = gameid;
+	}
+	
+	public synchronized void getTankImageForMain() {
+
+		int angle = gameClientHandler.game.getAngle();
+		int i = angle % 360 / 10;
+		if (i < 0)
+			i += 36;
+		imgTank = tanks[i];
+	
+		
+	
+	}
+	
+	public synchronized void getTankImageForSec() {
+		
+		int angle = gameClientHandler.game.getAngle2();
+		int i = angle % 360 / 10;
+		if (i < 0)
+			i += 36;
+		imgTank2 = tanks[i]; 
+
 	}
 
 }

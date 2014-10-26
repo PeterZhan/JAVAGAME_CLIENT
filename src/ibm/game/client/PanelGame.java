@@ -25,12 +25,11 @@ public class PanelGame extends JPanel implements MouseMotionListener {
 								// //new
 								// ImageIcon("./resources/land.jpg").getImage();
 
-	final static int MaxDiv = 36;
+	
 
-	public BufferedImage[] tanks = new BufferedImage[MaxDiv];
+	
 
-	public Image imgTank = null;// this.getToolkit().getImage("./resources/tank0.jpg");
-    public Image imgTank2 = null;
+	
 	public PanelGame() {
 		super();
 		setOpaque(false); // we don't paint all our bits
@@ -43,15 +42,7 @@ public class PanelGame extends JPanel implements MouseMotionListener {
 			e.printStackTrace();
 		}
 
-		for (int i = 0; i < MaxDiv; i++) {
-			try {
-				tanks[i] = ImageIO.read(new File("./resources/tank" + i
-						+ ".JPG"));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-
-		}
+		
 
 		// setBackground(new Color(51, 153, 255));
 
@@ -113,15 +104,15 @@ public class PanelGame extends JPanel implements MouseMotionListener {
 		int x = gameClientHandler.game.getX() - 20;
 		int y = gameClientHandler.game.getY() - 15;
 
-		g.drawImage(imgTank, x, y, 40, 30, null);
+		g.drawImage(gameClientHandler.game.getImgTank(), x, y, 42, 42, null);
 		
 		
-		if (gameClientHandler.game.ID == 2 ||(gameClientHandler.game.ID == 1 && imgTank2 != null))
+		if (gameClientHandler.game.ID == 2 ||(gameClientHandler.game.ID == 1 && gameClientHandler.game.getImgTank2() != null))
 		{
 			int x2 = gameClientHandler.game.getX2() - 20;
 		    int y2 = gameClientHandler.game.getY2() - 15;
 		
-		    g.drawImage(imgTank2, x2, y2, 40, 30, null);
+		    g.drawImage(gameClientHandler.game.getImgTank2(), x2, y2, 42, 42, null);
 		
 		}
 

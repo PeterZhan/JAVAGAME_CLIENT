@@ -219,7 +219,7 @@ public class GameWindow extends JFrame implements ActionListener {
 
 				try {
 					// channel.closeFuture().sync();
-
+                    timer.stop();
 					if (lastWriteFuture != null)
 						lastWriteFuture.sync();
 
@@ -243,17 +243,22 @@ public class GameWindow extends JFrame implements ActionListener {
 
 	}
 
+	int counter = 0;
 	public void actionPerformed(ActionEvent evt) {
 
 		final int[] keycodes = { 37, 38, 39, 40 };
+		
 
 		for (int i = 0; i < keycodes.length; i++) {
 
 			if (ks.getKeyPressed(keycodes[i])) {
-
-				cmd = "MOVE:" + gameClientHandler.game.getGameid() + ":"
+                if ((keycodes[i] >= 37 && keycodes[i] <= 40) || keycodes[i] == 32)
+                {
+				    cmd = "MOVE:" + gameClientHandler.game.getGameid() + ":"
 						+ keycodes[i] + "\r\n";
-				sendMessage();
+				    sendMessage();
+                } 
+                
 
 			}
 
@@ -265,7 +270,7 @@ public class GameWindow extends JFrame implements ActionListener {
 		setBounds(200, 100, gameClientHandler.game.getWidth(),
 				gameClientHandler.game.getHeight());
 
-		getTankImageForMain();
+		gameClientHandler.game.getTankImageForMain();
 
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height
@@ -281,7 +286,7 @@ public class GameWindow extends JFrame implements ActionListener {
 		setBounds(200, 100, gameClientHandler.game.getWidth(),
 				gameClientHandler.game.getHeight());
 
-		getTankImageForSec();
+		gameClientHandler.game.getTankImageForSec();
 
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height
@@ -293,28 +298,10 @@ public class GameWindow extends JFrame implements ActionListener {
 
 	}
 
-	public void getTankImageForMain() {
-
-		int angle = gameClientHandler.game.getAngle();
-		int i = angle % 360 / 10;
-		if (i < 0)
-			i += 36;
-		pg.imgTank = pg.tanks[i];
-	
-		
-	
-	}
 	
 	
-	public void getTankImageForSec() {
 	
-		int angle = gameClientHandler.game.getAngle2();
-		int i = angle % 360 / 10;
-		if (i < 0)
-			i += 36;
-		pg.imgTank2 = pg.tanks[i];
-
-	}
+	
 
 	public void sendMessage() {
 
