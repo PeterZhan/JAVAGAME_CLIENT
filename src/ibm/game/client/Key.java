@@ -12,7 +12,7 @@ public class Key {
 
 	}
 
-	public synchronized void setKeypressed(int code) {
+	public void setKeypressed(int code) {
 		if (code < 0 || code > 255)
 			return;
 
@@ -20,7 +20,7 @@ public class Key {
 
 	}
 
-	public synchronized void setKeyreleased(int code) {
+	public  void setKeyreleased(int code) {
 		if (code < 0 || code > 255)
 			return;
 
@@ -28,7 +28,7 @@ public class Key {
 
 	}
 
-	public synchronized boolean getKeyPressed(int code) {
+	public  boolean getKeyPressed(int code) {
 
 		if (code < 0 || code > 255)
 			return false;

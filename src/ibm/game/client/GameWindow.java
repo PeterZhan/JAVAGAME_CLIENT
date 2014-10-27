@@ -49,7 +49,7 @@ public class GameWindow extends JFrame implements ActionListener {
 	private Timer timer = null;
 	private String cmd = "";
 
-	public static Key ks = new Key();
+	
 
 	// public Timer keyTimer = new Timer();
 
@@ -80,15 +80,16 @@ public class GameWindow extends JFrame implements ActionListener {
 	public GameWindow() {
 		// getContentPane().setBackground(new Color(51, 153, 255));
 
-		pg.addKeyListener(new KeyAdapter() {
+	/*	pg.addKeyListener(new KeyAdapter() {
 
 			public void keyPressed(KeyEvent arg0) {
 
 				int keycode = arg0.getKeyCode();
 
+				System.out.println("" + keycode);
 				ks.setKeypressed(keycode);
 
-				System.out.println("" + keycode);
+				
 
 				/*
 				 * if (keycode != 32 && (keycode < 37 || keycode > 40)) return;
@@ -119,15 +120,15 @@ public class GameWindow extends JFrame implements ActionListener {
 				 * KeyPressTask tt = new KeyPressTask(keycode);
 				 * timer.schedule(tt, 200);
 				 */
-			}
+		//	}
 
-			public void keyReleased(KeyEvent arg0) {
+		//	public void keyReleased(KeyEvent arg0) {
+//
+		//		int keycode = arg0.getKeyCode();
 
-				int keycode = arg0.getKeyCode();
-
-				System.out.println("" + keycode);
-
-				ks.setKeyreleased(keycode);
+		//		System.out.println("" + keycode);
+//
+		//		ks.setKeyreleased(keycode);
 
 				/*
 				 * if (keycode != 32 && (keycode < 37 || keycode > 40)) return;
@@ -158,9 +159,9 @@ public class GameWindow extends JFrame implements ActionListener {
 				 * KeyPressTask tt = new KeyPressTask(keycode);
 				 * timer.schedule(tt, 200);
 				 */
-			}
+	//		}
 
-		});
+	//	});*/
 
 		this.getContentPane().add(pg);
 		pg.requestFocusInWindow();
@@ -179,7 +180,7 @@ public class GameWindow extends JFrame implements ActionListener {
             
 			Thread.sleep(300);
             DlgMain dialog = new DlgMain(this, true);
-    		dialog.setTitle("Tank Game");
+    		dialog.setTitle("Space Game");
     		dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
             
             
@@ -243,27 +244,58 @@ public class GameWindow extends JFrame implements ActionListener {
 
 	}
 
-	int counter = 0;
+	
 	public void actionPerformed(ActionEvent evt) {
 
-		final int[] keycodes = { 37, 38, 39, 40 };
+		//final int[] keycodes = {32, 37, 38, 39, 40 };
 		
-
+        cmd = "";
+        
+        if (pg.isLeftPressed())
+              	cmd += "MOVE:" + gameClientHandler.game.getGameid() + ":"
+					+ "37" + "\r\n";
+        
+        
+        if (pg.isUpPressed())
+       
+        	cmd += "MOVE:" + gameClientHandler.game.getGameid() + ":"
+					+ "38" + "\r\n";
+        
+        
+        if (pg.isRightPressed())
+       
+        	cmd += "MOVE:" + gameClientHandler.game.getGameid() + ":"
+					+ "39" + "\r\n";
+        
+        if (pg.isDownPressed())
+        	cmd += "MOVE:" + gameClientHandler.game.getGameid() + ":"
+					+ "40" + "\r\n";
+        
+        if (pg.isSpacePressed())
+        	cmd += "MOVE:" + gameClientHandler.game.getGameid() + ":"
+					+ "32" + "\r\n";
+        
+        
+        if (!cmd.equals(""))
+        	 sendMessage();
+        
+        /*
 		for (int i = 0; i < keycodes.length; i++) {
 
-			if (ks.getKeyPressed(keycodes[i])) {
-                if ((keycodes[i] >= 37 && keycodes[i] <= 40) || keycodes[i] == 32)
-                {
+			if (PanelGame.ks.getKeyPressed(keycodes[i])) {
+                
 				    cmd = "MOVE:" + gameClientHandler.game.getGameid() + ":"
 						+ keycodes[i] + "\r\n";
 				    sendMessage();
-                } 
+                
                 
 
-			}
+			}*/
 
-		}
+		
 
+	//   }
+		
 	}
 
 	public void initialGame() {
@@ -276,7 +308,7 @@ public class GameWindow extends JFrame implements ActionListener {
 		this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height
 				/ 2 - this.getSize().height / 2);
 
-		this.setTitle("Tank Game ID: " + gameClientHandler.game.getGameid());
+		this.setTitle("Space Game ID: " + gameClientHandler.game.getGameid());
 
 		repaint();
 
@@ -292,7 +324,7 @@ public class GameWindow extends JFrame implements ActionListener {
 		this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height
 				/ 2 - this.getSize().height / 2);
 
-		this.setTitle("Tank Game ID: " + gameClientHandler.game.getGameid());
+		this.setTitle("Space Game ID: " + gameClientHandler.game.getGameid());
 
 		repaint();
 

@@ -9,6 +9,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Stroke;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
@@ -19,22 +20,42 @@ import java.util.Timer;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-public class PanelGame extends JPanel implements MouseMotionListener {
+
+/**
+ *  
+ * @author c0640045
+ *  * 
+ *  I searched around and found out it's a limitation in the keyboard
+ *  (Logitech Internet Navigator) - it couldn't handle more than 2 consecutive key presses
+ *  (sad, I know...). In the end I replaced it with a so-called gaming keyboard 
+ *  (Logitech G11), and I haven't had the same problem ever since.
+ * 
+ * 
+ * 
+ *
+ */
+
+public class PanelGame extends JPanel implements  KeyListener {
 
 	private Image img = null;// ImageIO.read(new File("./resources/land.jpg"));
 								// //new
 								// ImageIcon("./resources/land.jpg").getImage();
 
 	
-
+	private  boolean isUpPressed, isDownPressed, isSpacePressed, isLeftPressed, isRightPressed;
 	
-
+	
+	
+	
+//	public static Key ks = new Key();
 	
 	public PanelGame() {
 		super();
 		setOpaque(false); // we don't paint all our bits
 		setLayout(new BorderLayout());
 		setBorder(BorderFactory.createLineBorder(Color.black));
+		setFocusable(true);
+        addKeyListener(this);
 
 		try {
 			img = ImageIO.read(new File("./resources/land.jpg"));
@@ -46,18 +67,9 @@ public class PanelGame extends JPanel implements MouseMotionListener {
 
 		// setBackground(new Color(51, 153, 255));
 
-		addMouseMotionListener(this);
+		
 	}
 
-	public void mouseDragged(MouseEvent e) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void mouseMoved(MouseEvent e) {
-		boolean status = this.requestFocusInWindow();
-	}
 
 	@Override
 	public Dimension getPreferredSize() {
@@ -133,5 +145,101 @@ public class PanelGame extends JPanel implements MouseMotionListener {
 		
 
 	}
+	
+	
+	public void keyPressed(KeyEvent arg0) {
+
+		switch(arg0.getKeyCode()) {
+		case KeyEvent.VK_UP: setUpPressed(true); break;
+        case KeyEvent.VK_DOWN: setDownPressed(true); break;
+        case KeyEvent.VK_SPACE: setSpacePressed(true); break;
+        case KeyEvent.VK_LEFT: setLeftPressed(true); break;
+        case KeyEvent.VK_RIGHT: setRightPressed(true); break;
+    }
+	
+		
+		
+	/*	int keycode = arg0.getKeyCode();
+
+	//	System.out.println("" + keycode);
+		
+		ks.setKeypressed(keycode);
+    */
+
+		
+	}
+
+	public void keyReleased(KeyEvent arg0) {
+
+		switch(arg0.getKeyCode()) {
+        case KeyEvent.VK_UP: setUpPressed(false); break;
+        case KeyEvent.VK_DOWN: setDownPressed(false); break;
+        case KeyEvent.VK_SPACE: setSpacePressed(false); break;
+        case KeyEvent.VK_LEFT: setLeftPressed(false); break;
+        case KeyEvent.VK_RIGHT: setRightPressed(false); break;
+    }	
+		
+		
+	/*	int keycode = arg0.getKeyCode();
+
+	//	System.out.println("" + keycode);
+
+		ks.setKeyreleased(keycode);
+
+		*/
+	}
+	
+	public  synchronized boolean isUpPressed() {
+		return isUpPressed;
+	}
+
+
+	public  synchronized void setUpPressed(boolean isUpPressed) {
+		this.isUpPressed = isUpPressed;
+	}
+
+
+	public  synchronized boolean isDownPressed() {
+		return isDownPressed;
+	}
+
+
+	public synchronized void setDownPressed(boolean isDownPressed) {
+		this.isDownPressed = isDownPressed;
+	}
+
+
+	public  synchronized boolean isSpacePressed() {
+		return isSpacePressed;
+	}
+
+
+	public  synchronized void setSpacePressed(boolean isSpacePressed) {
+		this.isSpacePressed = isSpacePressed;
+	}
+
+
+	public  synchronized boolean isLeftPressed() {
+		return isLeftPressed;
+	}
+
+
+	public  synchronized void setLeftPressed(boolean isLeftPressed) {
+		this.isLeftPressed = isLeftPressed;
+	}
+
+
+	public  synchronized boolean isRightPressed() {
+		return isRightPressed;
+	}
+
+
+	public  synchronized void setRightPressed(boolean isRightPressed) {
+		this.isRightPressed = isRightPressed;
+	}
+
+
+	public void keyTyped(KeyEvent ke) {
+    }
 
 }
