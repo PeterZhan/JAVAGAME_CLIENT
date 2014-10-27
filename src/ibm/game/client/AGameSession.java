@@ -30,6 +30,26 @@ public class AGameSession {
 	
 	private int angle2 = 180;
 	
+	
+	public synchronized int getFule1() {
+		return fule1;
+	}
+
+	public synchronized void setFule1(int fule1) {
+		this.fule1 = fule1;
+	}
+
+	public synchronized int getFule2() {
+		return fule2;
+	}
+
+	public synchronized void setFule2(int fule2) {
+		this.fule2 = fule2;
+	}
+
+	private int fule1 = 10;
+	private int fule2 = 10;
+	
 	final static int MaxDiv = 36;
 	
 	public synchronized Image getImgTank() {

@@ -104,7 +104,11 @@ public class PanelGame extends JPanel implements MouseMotionListener {
 		int x = gameClientHandler.game.getX() - 20;
 		int y = gameClientHandler.game.getY() - 15;
 
+		g.setColor(Color.yellow);
+		
 		g.drawImage(gameClientHandler.game.getImgTank(), x, y, 42, 42, null);
+		
+		g.drawString(""+gameClientHandler.game.getFule1(), x-10, y-10);
 		
 		
 		if (gameClientHandler.game.ID == 2 ||(gameClientHandler.game.ID == 1 && gameClientHandler.game.getImgTank2() != null))
@@ -113,8 +117,20 @@ public class PanelGame extends JPanel implements MouseMotionListener {
 		    int y2 = gameClientHandler.game.getY2() - 15;
 		
 		    g.drawImage(gameClientHandler.game.getImgTank2(), x2, y2, 42, 42, null);
+		    
+		    g.setColor(Color.GREEN);
+		    
+		    g.drawString(""+gameClientHandler.game.getFule2(), x2-10, y2-10);
 		
 		}
+		
+		
+		
+		
+		
+		
+		
+		
 
 	}
 
