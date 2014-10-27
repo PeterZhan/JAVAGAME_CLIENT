@@ -5,7 +5,7 @@ import java.awt.EventQueue;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
-public class gameClientHandler extends SimpleChannelInboundHandler<String>{
+public class gameClientHandler extends SimpleChannelInboundHandler<String> implements Runnable{
 
 	private GameWindow gw;
 	static AGameSession game = new AGameSession();
@@ -25,7 +25,9 @@ public class gameClientHandler extends SimpleChannelInboundHandler<String>{
 		String cmd = msgs[0];
 
 		switch (cmd) {
-		case "NEWJOIN":
+		
+		
+		 case "NEWJOIN":
 			//game.setGameid(msgs[1]);
 			String[] po = msgs[4].split(",");
 			game.setX2(Integer.parseInt(po[0]));
@@ -35,24 +37,27 @@ public class gameClientHandler extends SimpleChannelInboundHandler<String>{
 			
 			if (game.ID == 2)
 			{
-			String[] size = msgs[2].split(",");
-			game.setWidth(Integer.parseInt(size[0]));
-			game.setHeight(Integer.parseInt(size[1]));
+			   String[] size = msgs[2].split(",");
+			   game.setWidth(Integer.parseInt(size[0]));
+			   game.setHeight(Integer.parseInt(size[1]));
 			
-			String[] xys = msgs[3].split(",");
-			game.setC1(new Constraint(xys[0], xys[1], xys[2], xys[3]));
-			game.setC2(new Constraint(xys[4], xys[5], xys[6], xys[7]));
+			  String[] xys = msgs[3].split(",");
+			  game.setC1(new Constraint(xys[0], xys[1], xys[2], xys[3]));
+			  game.setC2(new Constraint(xys[4], xys[5], xys[6], xys[7]));
 
-			EventQueue.invokeLater(new Runnable() {
-				public void run() {
-					gw.initialGameForSec();
-				}
-			});
-			} 
+			  EventQueue.invokeLater(new Runnable() {
+				    public void run() {
+					     gw.initialGameForSec();
+				    }
+			   });
+			 
+			}
 			if (game.ID == 1){
 				
 				game.getTankImageForSec();
-				gw.repaint();
+				
+				EventQueue.invokeLater(this);
+				//gw.repaint();
 				
 				
 			}
@@ -78,12 +83,13 @@ public class gameClientHandler extends SimpleChannelInboundHandler<String>{
 			String[] xys = msgs[3].split(",");
 			game.setC1(new Constraint(xys[0], xys[1], xys[2], xys[3]));
 			game.setC2(new Constraint(xys[4], xys[5], xys[6], xys[7]));
-
+			
 			EventQueue.invokeLater(new Runnable() {
+				
 				public void run() {
 					gw.initialGame();
-				}
-			});
+				 }
+			  });
 
 			break;
 
@@ -108,12 +114,12 @@ public class gameClientHandler extends SimpleChannelInboundHandler<String>{
 				
 			}
 			   
-			   
+			 EventQueue.invokeLater(this);/* 
 			   EventQueue.invokeLater(new Runnable() {
 				public void run() {
 					gw.repaint();
 				}
-			  });
+			  });*/
 			
 			
 			
@@ -131,26 +137,27 @@ public class gameClientHandler extends SimpleChannelInboundHandler<String>{
 			{
 			  game.setAngle(newAngle);
 			  game.getTankImageForMain();
-			  EventQueue.invokeLater(new Runnable() {
+			  EventQueue.invokeLater(this);
+			 /* EventQueue.invokeLater(new Runnable() {
 					public void run() {
 
 						
 						gw.repaint();
 					}
-				});
+				});*/
 			  
 			}
 			else
 			{
 			  game.setAngle2(newAngle);
 			  game.getTankImageForSec();
-			  EventQueue.invokeLater(new Runnable() {
+			  EventQueue.invokeLater(this);/*new Runnable() {
 					public void run() {
 
 						
 						gw.repaint();
 					}
-				});
+				});*/
 			  
 			}
 
@@ -169,6 +176,59 @@ public class gameClientHandler extends SimpleChannelInboundHandler<String>{
 			}
 
 			break;
+			
+		case "FIRE":
+
+			
+
+			break;		
+			
+			
+			
+		case "SCORE":
+			
+			part  = Integer.parseInt(msgs[2]);
+			int score = Integer.parseInt(msgs[1]);
+			
+			if (part == 1)
+			{
+               game.setFule1(score);
+               
+               
+			}   
+			
+			if (part == 2)
+			{
+				game.setFule2(score);
+				
+			}
+			
+			EventQueue.invokeLater(this);
+			
+			
+			if (score <= 0)
+			{
+				
+				
+				if (game.ID == part)
+					game.setEndMsg("You lose!");
+				
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {						
+						gw.showEndMsg();
+					}
+				
+				
+			});
+			
+			}
+			
+			break;	
+			
+			
+			
+			
+			
 
 		default:
 			;
@@ -183,4 +243,10 @@ public class gameClientHandler extends SimpleChannelInboundHandler<String>{
 		ctx.close();
 	}
 
+	
+	public void run() {
+
+		
+		gw.repaint();
+	}
 }

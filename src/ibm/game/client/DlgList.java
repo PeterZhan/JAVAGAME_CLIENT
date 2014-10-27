@@ -18,7 +18,7 @@ import javax.swing.JLabel;
 public class DlgList extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	JComboBox gameList;
+	JComboBox gameList = null;
 	String gameid= null;
 
 	/**
@@ -35,11 +35,7 @@ public class DlgList extends JDialog {
 	}
 
 	public void putAllGames() {
-		if (AGameSession.namelist.length > 0) {
-			for (int i = 0; i < AGameSession.namelist.length; i++)
-				gameList.addItem(AGameSession.namelist[i]);
-
-		 }
+		
 
 	}
 
@@ -59,8 +55,12 @@ public class DlgList extends JDialog {
 			contentPanel.add(lblGames);
 		}
 		{
-			gameList = new JComboBox();
-			contentPanel.add(gameList);
+			if (AGameSession.namelist.length > 0) {
+				gameList = new JComboBox(AGameSession.namelist);
+				contentPanel.add(gameList);
+
+			 }
+			
 		}
 		{
 			JPanel buttonPane = new JPanel();

@@ -30,7 +30,18 @@ public class AGameSession {
 	
 	private int angle2 = 180;
 	
+		
+	String endMsg = "You win!";
 	
+	
+	public synchronized String getEndMsg() {
+		return endMsg;
+	}
+
+	public synchronized void setEndMsg(String endMsg) {
+		this.endMsg = endMsg;
+	}
+
 	public synchronized int getFule1() {
 		return fule1;
 	}

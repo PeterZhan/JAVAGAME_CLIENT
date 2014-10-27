@@ -19,6 +19,7 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.Timer;
 
@@ -252,9 +253,11 @@ public class GameWindow extends JFrame implements ActionListener {
         cmd = "";
         
         if (pg.isLeftPressed())
+        {
               	cmd += "MOVE:" + gameClientHandler.game.getGameid() + ":"
 					+ "37" + "\r\n";
-        
+              //	pg.setLeftPressed(false);
+        }
         
         if (pg.isUpPressed())
        
@@ -272,9 +275,11 @@ public class GameWindow extends JFrame implements ActionListener {
 					+ "40" + "\r\n";
         
         if (pg.isSpacePressed())
+        {
         	cmd += "MOVE:" + gameClientHandler.game.getGameid() + ":"
 					+ "32" + "\r\n";
-        
+        	pg.setSpacePressed(false);
+        }
         
         if (!cmd.equals(""))
         	 sendMessage();
@@ -338,6 +343,18 @@ public class GameWindow extends JFrame implements ActionListener {
 	public void sendMessage() {
 
 		channel.writeAndFlush(cmd);
+
+	}
+	
+	public void showEndMsg() {
+
+		String msg = gameClientHandler.game.getEndMsg();
+		
+		JOptionPane.showMessageDialog(null, msg);
+		
+		
+		System.exit(0);
+		
 
 	}
 
