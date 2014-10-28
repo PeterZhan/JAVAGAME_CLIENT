@@ -33,6 +33,48 @@ public class AGameSession {
 		
 	String endMsg = "You win!";
 	
+	private ArrayList<fireInfo> fires = new ArrayList();
+	
+	public synchronized void addNewFireInfo(fireInfo fi)
+	{
+		fires.add(fi);	
+		
+	}
+	public synchronized int getCountFires()
+	{
+		
+		
+		return fires.size();
+		
+		
+	}
+	
+	public synchronized void removeAllZeros()
+	{
+		for (fireInfo fi: fires)
+		{
+			
+			if (fi.time == 0)
+				fires.remove(fi);
+			
+			
+		}
+		
+		
+		
+		
+	}
+	
+	public synchronized fireInfo getNthFire(int i)
+	{
+		
+		
+		return fires.get(i);
+		
+		
+	}
+	
+	
 	
 	public synchronized String getEndMsg() {
 		return endMsg;

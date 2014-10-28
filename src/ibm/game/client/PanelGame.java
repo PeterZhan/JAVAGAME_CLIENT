@@ -137,9 +137,30 @@ public class PanelGame extends JPanel implements  KeyListener {
 		}
 		
 		
-		
-		
-		
+	    int fireCount = gameClientHandler.game.getCountFires();
+	    
+	    for (int i=0; i<fireCount; i++)
+	    {
+	    	fireInfo fi = gameClientHandler.game.getNthFire(i);
+	    	
+	    	if (fi.time > 0)
+	    	{
+	    	   if (fi.part == 1)
+	    		 g.setColor(Color.yellow);
+	    	
+	    	   if (fi.part == 2)
+	    		 g.setColor(Color.green);
+	    	
+	    	   g.drawLine(fi.x0, fi.y0, fi.x1, fi.y1);
+	    	
+	    	   fi.time--;
+	    	}
+	    	
+	    	
+	    	
+	    }
+	    
+	   
 		
 		
 		

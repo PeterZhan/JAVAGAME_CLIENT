@@ -178,7 +178,21 @@ public class gameClientHandler extends SimpleChannelInboundHandler<String> imple
 			break;
 			
 		case "FIRE":
-
+           fireInfo fi = new fireInfo();
+           part = Integer.parseInt(msgs[3]);
+           fi.part = part;
+		   String[] ps = msgs[1].split(",");
+		   fi.x0 = Integer.parseInt(ps[0]);
+		   fi.y0 = Integer.parseInt(ps[1]);
+		   fi.x1 = Integer.parseInt(ps[2]);
+		   fi.y1 = Integer.parseInt(ps[3]);
+		   
+		   fi.targeted = Boolean.parseBoolean(msgs[2]);
+		   
+		   game.addNewFireInfo(fi);
+			
+			
+		   EventQueue.invokeLater(this);
 			
 
 			break;		

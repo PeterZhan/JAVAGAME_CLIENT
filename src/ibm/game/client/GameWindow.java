@@ -300,6 +300,10 @@ public class GameWindow extends JFrame implements ActionListener {
 		
 
 	//   }
+        
+        
+      //  gameClientHandler.game.removeAllZeros();
+        
 		
 	}
 
