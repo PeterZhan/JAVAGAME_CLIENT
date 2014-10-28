@@ -51,11 +51,16 @@ public class AGameSession {
 	
 	public synchronized void removeAllZeros()
 	{
-		for (fireInfo fi: fires)
+		
+		Iterator<fireInfo> iterator = fires.iterator();
+		
+		while(iterator.hasNext())
 		{
+			fireInfo fi = iterator.next();
 			
 			if (fi.time == 0)
-				fires.remove(fi);
+				iterator.remove();
+			
 			
 			
 		}

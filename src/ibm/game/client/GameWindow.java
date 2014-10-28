@@ -286,6 +286,7 @@ public class GameWindow extends JFrame implements ActionListener {
         
         
        int fireCount = gameClientHandler.game.getCountFires();
+       boolean isRepaint = false;
 	    
 	    for (int i=0; i<fireCount; i++)
 	    {
@@ -293,7 +294,7 @@ public class GameWindow extends JFrame implements ActionListener {
 	    	
 	    	if (fi.time > 0)
 	    	{
-	    	   	    	
+	    	       	
 	    	   fi.time--;
 	    	}
 	    	
@@ -302,7 +303,11 @@ public class GameWindow extends JFrame implements ActionListener {
 	    }
         
 	    if (fireCount > 0)
+	    {
 	    	repaint();
+	    	gameClientHandler.game.removeAllZeros();	
+	    	
+	    }
         
         /*
 		for (int i = 0; i < keycodes.length; i++) {
