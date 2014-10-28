@@ -105,8 +105,8 @@ public class AGameSession {
 		this.fule2 = fule2;
 	}
 
-	private int fule1 = 10;
-	private int fule2 = 10;
+	private int fule1 = 30;
+	private int fule2 = 30;
 	
 	final static int MaxDiv = 36;
 	
