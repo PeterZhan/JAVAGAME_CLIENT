@@ -14,7 +14,7 @@ public class fireInfo {
 	
 	int fule = 0;
 	
-	int time = 3;
+	int time = 5;
 	
 
 }

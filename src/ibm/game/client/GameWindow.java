@@ -284,6 +284,26 @@ public class GameWindow extends JFrame implements ActionListener {
         if (!cmd.equals(""))
         	 sendMessage();
         
+        
+       int fireCount = gameClientHandler.game.getCountFires();
+	    
+	    for (int i=0; i<fireCount; i++)
+	    {
+	    	fireInfo fi = gameClientHandler.game.getNthFire(i);
+	    	
+	    	if (fi.time > 0)
+	    	{
+	    	   	    	
+	    	   fi.time--;
+	    	}
+	    	
+	    	
+	    	
+	    }
+        
+	    if (fireCount > 0)
+	    	repaint();
+        
         /*
 		for (int i = 0; i < keycodes.length; i++) {
 

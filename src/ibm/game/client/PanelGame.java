@@ -153,7 +153,7 @@ public class PanelGame extends JPanel implements  KeyListener {
 	    	
 	    	   g.drawLine(fi.x0, fi.y0, fi.x1, fi.y1);
 	    	
-	    	   fi.time--;
+	    	 
 	    	}
 	    	
 	    	
