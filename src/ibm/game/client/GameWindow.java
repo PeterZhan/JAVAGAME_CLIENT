@@ -179,9 +179,9 @@ public class GameWindow extends JFrame implements ActionListener {
 		try {
 			channel = b.connect(HOST, PORT).sync().channel();
             
-			Thread.sleep(300);
+			while(!AGameSession.isGotGames()) ;
             DlgMain dialog = new DlgMain(this, true);
-    		dialog.setTitle("Space Game");
+    		dialog.setTitle("Larser-War Game");
     		dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
             
             
@@ -252,33 +252,41 @@ public class GameWindow extends JFrame implements ActionListener {
 		
         cmd = "";
         
-        if (pg.isLeftPressed())
+        if (leftKey.isPressed())
         {
               	cmd += "MOVE:" + gameClientHandler.game.getGameid() + ":"
 					+ "37" + "\r\n";
               //	pg.setLeftPressed(false);
         }
         
-        if (pg.isUpPressed())
+        if (upKey.isPressed())
+        {
        
         	cmd += "MOVE:" + gameClientHandler.game.getGameid() + ":"
 					+ "38" + "\r\n";
+            	
+        }
         
         
-        if (pg.isRightPressed())
+        if (rightKey.isPressed())
+        {
        
         	cmd += "MOVE:" + gameClientHandler.game.getGameid() + ":"
 					+ "39" + "\r\n";
+        	
+          //  pg.setRightPressed(false);	
+        	
+        }
         
-        if (pg.isDownPressed())
+        if (downKey.isPressed())
         	cmd += "MOVE:" + gameClientHandler.game.getGameid() + ":"
 					+ "40" + "\r\n";
         
-        if (pg.isSpacePressed())
+        if (spaceKey.isPressed())
         {
         	cmd += "MOVE:" + gameClientHandler.game.getGameid() + ":"
 					+ "32" + "\r\n";
-        	pg.setSpacePressed(false);
+        	spaceKey.setPressed(false);
         }
         
         if (!cmd.equals(""))
@@ -342,7 +350,7 @@ public class GameWindow extends JFrame implements ActionListener {
 		this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height
 				/ 2 - this.getSize().height / 2);
 
-		this.setTitle("Space Game ID: " + gameClientHandler.game.getGameid());
+		this.setTitle("Larser-War Game ID: " + gameClientHandler.game.getGameid());
 
 		repaint();
 
@@ -358,7 +366,7 @@ public class GameWindow extends JFrame implements ActionListener {
 		this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height
 				/ 2 - this.getSize().height / 2);
 
-		this.setTitle("Space Game ID: " + gameClientHandler.game.getGameid());
+		this.setTitle("Larser-War Game ID: " + gameClientHandler.game.getGameid());
 
 		repaint();
 
@@ -376,6 +384,11 @@ public class GameWindow extends JFrame implements ActionListener {
 	}
 	
 	public void showEndMsg() {
+		
+		repaint();
+		
+		
+		
 
 		String msg = gameClientHandler.game.getEndMsg();
 		

@@ -32,7 +32,7 @@ public class gameClientHandler extends SimpleChannelInboundHandler<String> imple
 			String[] po = msgs[4].split(",");
 			game.setX2(Integer.parseInt(po[0]));
 			game.setY2(Integer.parseInt(po[1]));
-		//	game.setAngle2(Integer.parseInt(msgs[5]));
+			game.setAngle2(Integer.parseInt(msgs[5]));
 			
 			
 			if (game.ID == 2)
@@ -40,6 +40,7 @@ public class gameClientHandler extends SimpleChannelInboundHandler<String> imple
 			   String[] size = msgs[2].split(",");
 			   game.setWidth(Integer.parseInt(size[0]));
 			   game.setHeight(Integer.parseInt(size[1]));
+			//   game.setAngle(Integer.parseInt(msgs[5]));
 			
 			  String[] xys = msgs[3].split(",");
 			  game.setC1(new Constraint(xys[0], xys[1], xys[2], xys[3]));
@@ -176,6 +177,7 @@ public class gameClientHandler extends SimpleChannelInboundHandler<String> imple
 					AGameSession.namelist[i - 1] = msgs[i];  */
 
 			}
+			AGameSession.setGotGames(true);
 
 			break;
 			
@@ -224,6 +226,20 @@ public class gameClientHandler extends SimpleChannelInboundHandler<String> imple
 			
 			if (score <= 0)
 			{
+				
+				if (part == 1)
+				{
+					game.setImgTank(game.imgExp);
+					
+					
+				}
+				
+				if (part == 2)
+				{
+					game.setImgTank2(game.imgExp);
+					
+					
+				}
 				
 				
 				if (game.ID == part)

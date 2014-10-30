@@ -41,8 +41,11 @@ public class PanelGame extends JPanel implements  KeyListener {
 								// //new
 								// ImageIcon("./resources/land.jpg").getImage();
 
+	private Image imgShot = null;
 	
-	private  boolean isUpPressed, isDownPressed, isSpacePressed, isLeftPressed, isRightPressed;
+	private Image imgExp = null;
+	
+	/*private  boolean isUpPressed, isDownPressed, isSpacePressed, isLeftPressed, isRightPressed;*/
 	
 	
 	
@@ -59,6 +62,8 @@ public class PanelGame extends JPanel implements  KeyListener {
 
 		try {
 			img = ImageIO.read(new File("./resources/land.jpg"));
+			imgShot = ImageIO.read(new File("./resources/shot.png"));
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -116,11 +121,12 @@ public class PanelGame extends JPanel implements  KeyListener {
 		int x = gameClientHandler.game.getX() - 20;
 		int y = gameClientHandler.game.getY() - 15;
 
-		g.setColor(Color.yellow);
+		g.setColor(Color.YELLOW);
 		
 		g.drawImage(gameClientHandler.game.getImgTank(), x, y, 42, 42, null);
 		
 		g.drawString(""+gameClientHandler.game.getFule1(), x-10, y-10);
+		 g.fillRect(x-15, y+10, 5, -gameClientHandler.game.getFule1());
 		
 		
 		if (gameClientHandler.game.ID == 2 ||(gameClientHandler.game.ID == 1 && gameClientHandler.game.getImgTank2() != null))
@@ -130,9 +136,11 @@ public class PanelGame extends JPanel implements  KeyListener {
 		
 		    g.drawImage(gameClientHandler.game.getImgTank2(), x2, y2, 42, 42, null);
 		    
-		    g.setColor(Color.GREEN);
+		    g.setColor(Color.PINK);
 		    
-		    g.drawString(""+gameClientHandler.game.getFule2(), x2-10, y2-10);
+		    g.drawString(""+gameClientHandler.game.getFule2(), x2+35, y2-10);
+		    
+		    g.fillRect(x2+50, y2+10, 5, -gameClientHandler.game.getFule2());
 		
 		}
 		
@@ -146,12 +154,15 @@ public class PanelGame extends JPanel implements  KeyListener {
 	    	if (fi.time > 0)
 	    	{
 	    	   if (fi.part == 1)
-	    		 g.setColor(Color.yellow);
+	    		 g.setColor(Color.YELLOW);
 	    	
 	    	   if (fi.part == 2)
-	    		 g.setColor(Color.green);
+	    		 g.setColor(Color.PINK);
 	    	
 	    	   g.drawLine(fi.x0, fi.y0, fi.x1, fi.y1);
+	    	   
+	    	   if (fi.targeted)
+	    		   g.drawImage(imgShot, fi.x1-10, fi.y1-7, 26, 26, null);
 	    	
 	    	 
 	    	}
@@ -171,11 +182,11 @@ public class PanelGame extends JPanel implements  KeyListener {
 	public void keyPressed(KeyEvent arg0) {
 
 		switch(arg0.getKeyCode()) {
-		case KeyEvent.VK_UP: setUpPressed(true); break;
-        case KeyEvent.VK_DOWN: setDownPressed(true); break;
-        case KeyEvent.VK_SPACE: setSpacePressed(true); break;
-        case KeyEvent.VK_LEFT: setLeftPressed(true); break;
-        case KeyEvent.VK_RIGHT: setRightPressed(true); break;
+		case KeyEvent.VK_UP: upKey.setPressed(true); break;
+        case KeyEvent.VK_DOWN: downKey.setPressed(true); break;
+        case KeyEvent.VK_SPACE: spaceKey.setPressed(true); break;
+        case KeyEvent.VK_LEFT: leftKey.setPressed(true); break;
+        case KeyEvent.VK_RIGHT: rightKey.setPressed(true); break;
     }
 	
 		
@@ -193,11 +204,11 @@ public class PanelGame extends JPanel implements  KeyListener {
 	public void keyReleased(KeyEvent arg0) {
 
 		switch(arg0.getKeyCode()) {
-        case KeyEvent.VK_UP: setUpPressed(false); break;
-        case KeyEvent.VK_DOWN: setDownPressed(false); break;
-        case KeyEvent.VK_SPACE: setSpacePressed(false); break;
-        case KeyEvent.VK_LEFT: setLeftPressed(false); break;
-        case KeyEvent.VK_RIGHT: setRightPressed(false); break;
+        case KeyEvent.VK_UP: upKey.setPressed(false); break;
+        case KeyEvent.VK_DOWN: downKey.setPressed(false); break;
+        case KeyEvent.VK_SPACE: spaceKey.setPressed(false); break;
+        case KeyEvent.VK_LEFT: leftKey.setPressed(false); break;
+        case KeyEvent.VK_RIGHT: rightKey.setPressed(false); break;
     }	
 		
 		
@@ -209,7 +220,7 @@ public class PanelGame extends JPanel implements  KeyListener {
 
 		*/
 	}
-	
+	/*
 	public  synchronized boolean isUpPressed() {
 		return isUpPressed;
 	}
@@ -259,8 +270,8 @@ public class PanelGame extends JPanel implements  KeyListener {
 		this.isRightPressed = isRightPressed;
 	}
 
-
+*/
 	public void keyTyped(KeyEvent ke) {
     }
-
+  
 }

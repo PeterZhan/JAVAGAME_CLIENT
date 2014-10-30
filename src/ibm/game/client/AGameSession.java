@@ -15,6 +15,9 @@ public class AGameSession {
 	public static int ID;
 
 	public static String[] namelist = new String[0];
+	
+	
+	public static boolean GotGames = false;
 
 	private int width;
 	private int height;
@@ -129,6 +132,7 @@ public class AGameSession {
 	public BufferedImage[] tanks = new BufferedImage[MaxDiv];
 	public Image imgTank = null;// this.getToolkit().getImage("./resources/tank0.jpg");
     public Image imgTank2 = null;
+    public static Image imgExp = null;//ImageIO.read(new File("./resources/exploded.png"));
 
 
 
@@ -220,15 +224,24 @@ public class AGameSession {
 	}
 
 	public AGameSession() {
+		
+		
+		try {
 		for (int i = 0; i < MaxDiv; i++) {
-			try {
+			
 				tanks[i] = ImageIO.read(new File("./resources/tank" + i
 						+ ".png"));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			
 
 		}
+		
+		        imgExp = ImageIO.read(new File("./resources/exploded.png"));
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
 		
 		
 
@@ -259,5 +272,15 @@ public class AGameSession {
 		imgTank2 = tanks[i]; 
 
 	}
+	public static synchronized boolean isGotGames() {
+		return GotGames;
+	}
+	public static synchronized void setGotGames(boolean gotGames) {
+		GotGames = gotGames;
+	}
+	
+	
+	
+	
 
 }

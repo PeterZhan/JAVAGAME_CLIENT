@@ -22,7 +22,7 @@ import javax.swing.JList;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class DlgMain extends JDialog {
+public class DlgMain extends JDialog implements ActionListener{
 
 	private final JPanel contentPanel = new JPanel();
 
@@ -60,42 +60,31 @@ public class DlgMain extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		ButtonGroup group = new ButtonGroup();
-		{
+		
 			JRadioButton rdbtnStartANew = new JRadioButton("start a new game");
-			rdbtnStartANew.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent arg0) {
-
-					gameWay = "NEW";
-
-				}
-			});
+			rdbtnStartANew.setActionCommand("NEW");
+			rdbtnStartANew.addActionListener(this);
 			rdbtnStartANew.setSelected(true);
 			contentPanel.add(rdbtnStartANew);
 			group.add(rdbtnStartANew);
-		}
+		
 
-		{
+		
 			if (AGameSession.namelist.length > 0){
 			  JRadioButton rdbtnJoinAnExisting = new JRadioButton(
 					"join an existing game");
-			  rdbtnJoinAnExisting.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-
-					gameWay = "JOIN";
-				}
-			  });
+			  rdbtnJoinAnExisting.setActionCommand("JOIN");
+			  rdbtnJoinAnExisting.addActionListener(this);
 			contentPanel.add(rdbtnJoinAnExisting);
 			group.add(rdbtnJoinAnExisting);
 			}
 
-		}
-		{
+	     
+	
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
+			
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
@@ -108,8 +97,8 @@ public class DlgMain extends JDialog {
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
-			}
-			{
+			
+		
 				JButton cancelButton = new JButton("Cancel");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -119,11 +108,16 @@ public class DlgMain extends JDialog {
 				});
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
-			}
-		}
+			
+		
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height
 				/ 2 - this.getSize().height / 2);
+	}
+	
+	
+	public void actionPerformed(ActionEvent e) {
+	    gameWay = e.getActionCommand();
 	}
 
 }
