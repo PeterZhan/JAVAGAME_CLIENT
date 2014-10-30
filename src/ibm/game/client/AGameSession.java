@@ -8,6 +8,8 @@ import java.util.*;
 import javax.imageio.ImageIO;
 
 import io.netty.channel.Channel;
+import sun.audio.*;
+import java.io.*;
 
 public class AGameSession {
 
@@ -37,6 +39,9 @@ public class AGameSession {
 	String endMsg = "You win!";
 	
 	private ArrayList<fireInfo> fires = new ArrayList();
+	
+	
+	public static AudioStream laserGun = null;
 	
 	public synchronized void addNewFireInfo(fireInfo fi)
 	{
@@ -236,6 +241,10 @@ public class AGameSession {
 		}
 		
 		        imgExp = ImageIO.read(new File("./resources/exploded.png"));
+		        
+		        
+		        
+		        
 		
 		} catch (Exception e) {
 			e.printStackTrace();

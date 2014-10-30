@@ -195,6 +195,9 @@ public class gameClientHandler extends SimpleChannelInboundHandler<String> imple
 		   
 		   game.addNewFireInfo(fi);
 			
+		   
+		   new PlaySoundThread("./resources/lasershot.wav").start();
+		   
 			
 		   EventQueue.invokeLater(this);
 			

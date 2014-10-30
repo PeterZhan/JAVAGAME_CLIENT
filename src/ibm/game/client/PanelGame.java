@@ -102,7 +102,7 @@ public class PanelGame extends JPanel implements  KeyListener {
 		 * g.fillOval(x,y,size.width-(2*x),size.height-(2*y)); x+=10; y+=10;
 		 * i++; }
 		 */
-
+  
 		g.drawImage(img, 0, 0, gameClientHandler.game.getWidth(),
 				gameClientHandler.game.getHeight(), null);
 
@@ -126,7 +126,7 @@ public class PanelGame extends JPanel implements  KeyListener {
 		g.drawImage(gameClientHandler.game.getImgTank(), x, y, 42, 42, null);
 		
 		g.drawString(""+gameClientHandler.game.getFule1(), x-10, y-10);
-		 g.fillRect(x-15, y+10, 5, -gameClientHandler.game.getFule1());
+		g.fillRect(x-15, y+10-gameClientHandler.game.getFule1(), 5, gameClientHandler.game.getFule1());
 		
 		
 		if (gameClientHandler.game.ID == 2 ||(gameClientHandler.game.ID == 1 && gameClientHandler.game.getImgTank2() != null))
@@ -136,11 +136,11 @@ public class PanelGame extends JPanel implements  KeyListener {
 		
 		    g.drawImage(gameClientHandler.game.getImgTank2(), x2, y2, 42, 42, null);
 		    
-		    g.setColor(Color.PINK);
+		    g.setColor(Color.RED);
 		    
 		    g.drawString(""+gameClientHandler.game.getFule2(), x2+35, y2-10);
 		    
-		    g.fillRect(x2+50, y2+10, 5, -gameClientHandler.game.getFule2());
+		    g.fillRect(x2+50, y2+10-gameClientHandler.game.getFule2(), 5, gameClientHandler.game.getFule2());
 		
 		}
 		
@@ -157,7 +157,7 @@ public class PanelGame extends JPanel implements  KeyListener {
 	    		 g.setColor(Color.YELLOW);
 	    	
 	    	   if (fi.part == 2)
-	    		 g.setColor(Color.PINK);
+	    		 g.setColor(Color.RED);
 	    	
 	    	   g.drawLine(fi.x0, fi.y0, fi.x1, fi.y1);
 	    	   
