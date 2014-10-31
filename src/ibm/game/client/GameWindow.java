@@ -40,9 +40,8 @@ public class GameWindow extends JFrame implements ActionListener {
 	/**
 	 * Launch the application.
 	 */
-	
 
-	//static final long serialVersionUID = 2343534;
+	// static final long serialVersionUID = 2343534;
 	private Channel channel = null;
 	private ChannelFuture lastWriteFuture = null;
 	private EventLoopGroup group = new NioEventLoopGroup();
@@ -50,7 +49,8 @@ public class GameWindow extends JFrame implements ActionListener {
 	private Timer timer = null;
 	private String cmd = "";
 
-	
+	public static Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+	public static int step = 3;
 
 	// public Timer keyTimer = new Timer();
 
@@ -81,88 +81,85 @@ public class GameWindow extends JFrame implements ActionListener {
 	public GameWindow() {
 		// getContentPane().setBackground(new Color(51, 153, 255));
 
-	/*	pg.addKeyListener(new KeyAdapter() {
+		/*
+		 * pg.addKeyListener(new KeyAdapter() {
+		 * 
+		 * public void keyPressed(KeyEvent arg0) {
+		 * 
+		 * int keycode = arg0.getKeyCode();
+		 * 
+		 * System.out.println("" + keycode); ks.setKeypressed(keycode);
+		 * 
+		 * 
+		 * 
+		 * /* if (keycode != 32 && (keycode < 37 || keycode > 40)) return;
+		 * 
+		 * cmd = "MOVE:" + gameClientHandler.game.getGameid() + ":" + keycode +
+		 * "\r\n";
+		 * 
+		 * EventQueue.invokeLater(new Runnable() { public void run() {
+		 * sendMessage(); } });
+		 */
 
-			public void keyPressed(KeyEvent arg0) {
+		/*
+		 * class KeyPressTask extends TimerTask { private int keycode;
+		 * 
+		 * public KeyPressTask(int code) { keycode = code; }
+		 * 
+		 * public void run() { cmd = "MOVE:" +
+		 * gameClientHandler.game.getGameid() + ":" + keycode + "\r\n";
+		 * 
+		 * // EventQueue.invokeLater(new Runnable() { // public void run() {
+		 * sendMessage();
+		 * 
+		 * 
+		 * // } // }); timer.schedule(this, 200); }
+		 * 
+		 * }
+		 * 
+		 * KeyPressTask tt = new KeyPressTask(keycode); timer.schedule(tt, 200);
+		 */
+		// }
 
-				int keycode = arg0.getKeyCode();
+		// public void keyReleased(KeyEvent arg0) {
+		//
+		// int keycode = arg0.getKeyCode();
 
-				System.out.println("" + keycode);
-				ks.setKeypressed(keycode);
+		// System.out.println("" + keycode);
+		//
+		// ks.setKeyreleased(keycode);
 
-				
+		/*
+		 * if (keycode != 32 && (keycode < 37 || keycode > 40)) return;
+		 * 
+		 * cmd = "MOVE:" + gameClientHandler.game.getGameid() + ":" + keycode +
+		 * "\r\n";
+		 * 
+		 * EventQueue.invokeLater(new Runnable() { public void run() {
+		 * sendMessage(); } });
+		 */
 
-				/*
-				 * if (keycode != 32 && (keycode < 37 || keycode > 40)) return;
-				 * 
-				 * cmd = "MOVE:" + gameClientHandler.game.getGameid() + ":" +
-				 * keycode + "\r\n";
-				 * 
-				 * EventQueue.invokeLater(new Runnable() { public void run() {
-				 * sendMessage(); } });
-				 */
+		/*
+		 * class KeyPressTask extends TimerTask { private int keycode;
+		 * 
+		 * public KeyPressTask(int code) { keycode = code; }
+		 * 
+		 * public void run() { cmd = "MOVE:" +
+		 * gameClientHandler.game.getGameid() + ":" + keycode + "\r\n";
+		 * 
+		 * // EventQueue.invokeLater(new Runnable() { // public void run() {
+		 * sendMessage();
+		 * 
+		 * 
+		 * // } // }); timer.schedule(this, 200); }
+		 * 
+		 * }
+		 * 
+		 * KeyPressTask tt = new KeyPressTask(keycode); timer.schedule(tt, 200);
+		 */
+		// }
 
-				/*
-				 * class KeyPressTask extends TimerTask { private int keycode;
-				 * 
-				 * public KeyPressTask(int code) { keycode = code; }
-				 * 
-				 * public void run() { cmd = "MOVE:" +
-				 * gameClientHandler.game.getGameid() + ":" + keycode + "\r\n";
-				 * 
-				 * // EventQueue.invokeLater(new Runnable() { // public void
-				 * run() { sendMessage();
-				 * 
-				 * 
-				 * // } // }); timer.schedule(this, 200); }
-				 * 
-				 * }
-				 * 
-				 * KeyPressTask tt = new KeyPressTask(keycode);
-				 * timer.schedule(tt, 200);
-				 */
-		//	}
-
-		//	public void keyReleased(KeyEvent arg0) {
-//
-		//		int keycode = arg0.getKeyCode();
-
-		//		System.out.println("" + keycode);
-//
-		//		ks.setKeyreleased(keycode);
-
-				/*
-				 * if (keycode != 32 && (keycode < 37 || keycode > 40)) return;
-				 * 
-				 * cmd = "MOVE:" + gameClientHandler.game.getGameid() + ":" +
-				 * keycode + "\r\n";
-				 * 
-				 * EventQueue.invokeLater(new Runnable() { public void run() {
-				 * sendMessage(); } });
-				 */
-
-				/*
-				 * class KeyPressTask extends TimerTask { private int keycode;
-				 * 
-				 * public KeyPressTask(int code) { keycode = code; }
-				 * 
-				 * public void run() { cmd = "MOVE:" +
-				 * gameClientHandler.game.getGameid() + ":" + keycode + "\r\n";
-				 * 
-				 * // EventQueue.invokeLater(new Runnable() { // public void
-				 * run() { sendMessage();
-				 * 
-				 * 
-				 * // } // }); timer.schedule(this, 200); }
-				 * 
-				 * }
-				 * 
-				 * KeyPressTask tt = new KeyPressTask(keycode);
-				 * timer.schedule(tt, 200);
-				 */
-	//		}
-
-	//	});*/
+		// });*/
 
 		this.getContentPane().add(pg);
 		pg.requestFocusInWindow();
@@ -171,24 +168,21 @@ public class GameWindow extends JFrame implements ActionListener {
 				.handler(new gameClientInitializer(this));
 
 		// Start the connection attempt.
-		
 
-		
 		// System.out.println(dialog.getOwner().getClass());
 
 		try {
 			channel = b.connect(HOST, PORT).sync().channel();
-            
-			while(!AGameSession.isGotGames()) ;
-            DlgMain dialog = new DlgMain(this, true);
-    		dialog.setTitle("Larser-War Game");
-    		dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-            
-            
-            DlgList dialogList = new DlgList();
-        	dialogList.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 
-            	
+			while (!AGameSession.isGotGames())
+				;
+			DlgMain dialog = new DlgMain(this, true);
+			dialog.setTitle("Larser-War Game");
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+
+			DlgList dialogList = new DlgList();
+			dialogList.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+
 			dialog.setVisible(true);
 
 			if (dialog.gameWay.equals("NEW"))
@@ -202,11 +196,11 @@ public class GameWindow extends JFrame implements ActionListener {
 
 				dialogList.putAllGames();
 				dialogList.setVisible(true);
-				
+
 				gameClientHandler.game.setGameid(dialogList.gameid);
-				
-				lastWriteFuture = channel.writeAndFlush("JOIN:" + gameClientHandler.game.getGameid() + "\r\n");
-				
+
+				lastWriteFuture = channel.writeAndFlush("JOIN:"
+						+ gameClientHandler.game.getGameid() + "\r\n");
 
 			}
 
@@ -221,7 +215,7 @@ public class GameWindow extends JFrame implements ActionListener {
 
 				try {
 					// channel.closeFuture().sync();
-                    timer.stop();
+					timer.stop();
 					if (lastWriteFuture != null)
 						lastWriteFuture.sync();
 
@@ -245,164 +239,157 @@ public class GameWindow extends JFrame implements ActionListener {
 
 	}
 
-	
 	public void actionPerformed(ActionEvent evt) {
 
-		//final int[] keycodes = {32, 37, 38, 39, 40 };
-		
-        cmd = "";
-        
-        if (leftKey.isPressed())
-        {
-              	cmd += "MOVE:" + gameClientHandler.game.getGameid() + ":"
-					+ "37" + "\r\n";
-              //	pg.setLeftPressed(false);
-        }
-        
-        if (upKey.isPressed())
-        {
-       
-        	cmd += "MOVE:" + gameClientHandler.game.getGameid() + ":"
-					+ "38" + "\r\n";
-            	
-        }
-        
-        
-        if (rightKey.isPressed())
-        {
-       
-        	cmd += "MOVE:" + gameClientHandler.game.getGameid() + ":"
-					+ "39" + "\r\n";
-        	
-          //  pg.setRightPressed(false);	
-        	
-        }
-        
-        if (downKey.isPressed())
-        	cmd += "MOVE:" + gameClientHandler.game.getGameid() + ":"
-					+ "40" + "\r\n";
-        
-        if (spaceKey.isPressed())
-        {
-        	cmd += "MOVE:" + gameClientHandler.game.getGameid() + ":"
-					+ "32" + "\r\n";
-        	spaceKey.setPressed(false);
-        }
-        
-        if (!cmd.equals(""))
-        	 sendMessage();
-        
-        
-       int fireCount = gameClientHandler.game.getCountFires();
-       boolean isRepaint = false;
-	    
-	    for (int i=0; i<fireCount; i++)
-	    {
-	    	fireInfo fi = gameClientHandler.game.getNthFire(i);
-	    	
-	    	if (fi.time > 0)
-	    	{
-	    	       	
-	    	   fi.time--;
-	    	}
-	    	
-	    	
-	    	
-	    }
-        
-	    if (fireCount > 0)
-	    {
-	    	repaint();
-	    	gameClientHandler.game.removeAllZeros();	
-	    	
-	    }
-        
-        /*
-		for (int i = 0; i < keycodes.length; i++) {
+		// final int[] keycodes = {32, 37, 38, 39, 40 };
 
-			if (PanelGame.ks.getKeyPressed(keycodes[i])) {
-                
-				    cmd = "MOVE:" + gameClientHandler.game.getGameid() + ":"
-						+ keycodes[i] + "\r\n";
-				    sendMessage();
-                
-                
+		cmd = "";
 
-			}*/
+		if (leftKey.isPressed()) {
+			cmd += "MOVE:" + gameClientHandler.game.getGameid() + ":" + "37"
+					+ "\r\n";
+			// pg.setLeftPressed(false);
+		}
 
-		
+		if (upKey.isPressed()) {
+			
+			
+			cmd += "MOVE:" + gameClientHandler.game.getGameid() + ":" + "38"
+					+ "\r\n";
 
-	//   }
-        
-        
-      //  gameClientHandler.game.removeAllZeros();
-        
-		
+		}
+
+		if (rightKey.isPressed()) {
+
+			cmd += "MOVE:" + gameClientHandler.game.getGameid() + ":" + "39"
+					+ "\r\n";
+
+			// pg.setRightPressed(false);
+
+		}
+
+		if (downKey.isPressed()) {
+
+			
+
+			cmd += "MOVE:" + gameClientHandler.game.getGameid() + ":" + "40"
+					+ "\r\n";
+		}
+		if (spaceKey.isPressed()) {
+			cmd += "MOVE:" + gameClientHandler.game.getGameid() + ":" + "32"
+					+ "\r\n";
+			spaceKey.setPressed(false);
+		}
+
+		if (!cmd.equals(""))
+			sendMessage();
+
+		int fireCount = gameClientHandler.game.getCountFires();
+		boolean isRepaint = false;
+
+		for (int i = 0; i < fireCount; i++) {
+			fireInfo fi = gameClientHandler.game.getNthFire(i);
+
+			if (fi.time > 0) {
+
+				fi.time--;
+			}
+
+		}
+
+		if (fireCount > 0) {
+			repaint();
+			gameClientHandler.game.removeAllZeros();
+
+		}
+
+		/*
+		 * for (int i = 0; i < keycodes.length; i++) {
+		 * 
+		 * if (PanelGame.ks.getKeyPressed(keycodes[i])) {
+		 * 
+		 * cmd = "MOVE:" + gameClientHandler.game.getGameid() + ":" +
+		 * keycodes[i] + "\r\n"; sendMessage();
+		 * 
+		 * 
+		 * 
+		 * }
+		 */
+
+		// }
+
+		// gameClientHandler.game.removeAllZeros();
+
 	}
 
 	public void initialGame() {
-		setBounds(200, 100, gameClientHandler.game.getWidth(),
-				gameClientHandler.game.getHeight());
+		// setBounds(200, 100, gameClientHandler.game.getWidth(),
+		// gameClientHandler.game.getHeight());
 
 		gameClientHandler.game.getTankImageForMain();
 
-		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height
-				/ 2 - this.getSize().height / 2);
+		setBounds(0, 0, dim.width, dim.height);
 
-		this.setTitle("Larser-War Game ID: " + gameClientHandler.game.getGameid());
+		// this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height
+		// / 2 - this.getSize().height / 2);
+
+		this.setTitle("Larser-War Game ID: "
+				+ gameClientHandler.game.getGameid());
 
 		repaint();
+		
+		
+		String msg = "SIZE:" + dim.width + "," + dim.height+ "\n";
+		channel.writeAndFlush(msg);
+		
+		
+		
+		
 
 	}
-	
+
 	public void initialGameForSec() {
-		setBounds(200, 100, gameClientHandler.game.getWidth(),
-				gameClientHandler.game.getHeight());
+		// setBounds(200, 100, gameClientHandler.game.getWidth(),
+		// gameClientHandler.game.getHeight());
 
 		gameClientHandler.game.getTankImageForSec();
 
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-		this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height
-				/ 2 - this.getSize().height / 2);
 
-		this.setTitle("Larser-War Game ID: " + gameClientHandler.game.getGameid());
+		setBounds(0, 0, dim.width, dim.height);
+
+		// this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height
+		// / 2 - this.getSize().height / 2);
+
+		this.setTitle("Larser-War Game ID: "
+				+ gameClientHandler.game.getGameid());
 
 		repaint();
 
 	}
-
-	
-	
-	
-	
 
 	public void sendMessage() {
 
 		channel.writeAndFlush(cmd);
 
 	}
-	
+
 	public void showEndMsg() {
-		
+
 		repaint();
-		
-		try{
-		
-		new PlaySoundThread("./resources/ExplosionLoud.wav").start();
-		}catch (Exception e)
-		{
-			
+
+		try {
+
+			new PlaySoundThread("./resources/ExplosionLoud.wav").start();
+		} catch (Exception e) {
+
 		}
-		
 
 		String msg = gameClientHandler.game.getEndMsg();
-		
+
 		JOptionPane.showMessageDialog(null, msg);
-		
-		
+
 		System.exit(0);
-		
 
 	}
 

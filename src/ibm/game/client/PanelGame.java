@@ -102,11 +102,12 @@ public class PanelGame extends JPanel implements  KeyListener {
 		 * g.fillOval(x,y,size.width-(2*x),size.height-(2*y)); x+=10; y+=10;
 		 * i++; }
 		 */
-  
-		g.drawImage(img, 0, 0, gameClientHandler.game.getWidth(),
-				gameClientHandler.game.getHeight(), null);
+		
+   
+		g.drawImage(img, 0, 0, (int)GameWindow.dim.getWidth(),
+				(int)GameWindow.dim.getHeight(), null);
 
-		g.setColor(Color.red);
+	/*	g.setColor(Color.red);
 
 		g.drawRect(gameClientHandler.game.getC1().getX0() - 20,
 				gameClientHandler.game.getC1().getY0() - 20,
@@ -116,7 +117,7 @@ public class PanelGame extends JPanel implements  KeyListener {
 		g.drawRect(gameClientHandler.game.getC2().getX0() - 20,
 				gameClientHandler.game.getC2().getY0() - 20,
 				gameClientHandler.game.getC2().getWidth() + 40,
-				gameClientHandler.game.getC2().getHeight() + 40);
+				gameClientHandler.game.getC2().getHeight() + 40);  */
 		// g.setColor(Color.YELLOW);
 		int x = gameClientHandler.game.getX() - 20;
 		int y = gameClientHandler.game.getY() - 15;
