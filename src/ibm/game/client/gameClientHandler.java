@@ -198,7 +198,11 @@ public class gameClientHandler extends SimpleChannelInboundHandler<String> imple
 		   
 		   new PlaySoundThread("./resources/lasershot.wav").start();
 		   
-			
+		   if (fi.targeted)
+				new PlaySoundThread("./resources/GotExplosion.wav").start();
+					
+		   
+		   
 		   EventQueue.invokeLater(this);
 			
 
@@ -249,7 +253,8 @@ public class gameClientHandler extends SimpleChannelInboundHandler<String> imple
 					game.setEndMsg("You lose!");
 				
 				EventQueue.invokeLater(new Runnable() {
-					public void run() {						
+					public void run() {		
+						
 						gw.showEndMsg();
 					}
 				

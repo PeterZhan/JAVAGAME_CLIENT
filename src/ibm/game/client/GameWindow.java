@@ -387,7 +387,13 @@ public class GameWindow extends JFrame implements ActionListener {
 		
 		repaint();
 		
+		try{
 		
+		new PlaySoundThread("./resources/ExplosionLoud.wav").start();
+		}catch (Exception e)
+		{
+			
+		}
 		
 
 		String msg = gameClientHandler.game.getEndMsg();
