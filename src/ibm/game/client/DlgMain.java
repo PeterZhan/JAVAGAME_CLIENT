@@ -31,6 +31,8 @@ public class DlgMain extends JDialog implements ActionListener{
 	/**
 	 * Launch the application.
 	 */
+	
+	/*
 	public static void main(String[] args) {
 		try {
 			DlgMain dialog = new DlgMain(null, true);
@@ -39,7 +41,7 @@ public class DlgMain extends JDialog implements ActionListener{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 
 	/**
 	 * Create the dialog.

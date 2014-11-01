@@ -24,6 +24,7 @@ public class DlgList extends JDialog {
 	/**
 	 * Launch the application.
 	 */
+	/*
 	public static void main(String[] args) {
 		try {
 			DlgList dialog = new DlgList();
@@ -33,7 +34,7 @@ public class DlgList extends JDialog {
 			e.printStackTrace();
 		}
 	}
-
+*/
 	public void putAllGames() {
 		
 
