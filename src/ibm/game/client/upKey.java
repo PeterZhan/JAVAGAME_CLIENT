@@ -11,8 +11,4 @@ public class upKey {
 		upKey.pressed = pressed;
 	}
 
-	
-	
-	
-
 }

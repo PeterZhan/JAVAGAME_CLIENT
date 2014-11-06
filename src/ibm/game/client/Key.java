@@ -20,7 +20,7 @@ public class Key {
 
 	}
 
-	public  void setKeyreleased(int code) {
+	public void setKeyreleased(int code) {
 		if (code < 0 || code > 255)
 			return;
 
@@ -28,7 +28,7 @@ public class Key {
 
 	}
 
-	public  boolean getKeyPressed(int code) {
+	public boolean getKeyPressed(int code) {
 
 		if (code < 0 || code > 255)
 			return false;

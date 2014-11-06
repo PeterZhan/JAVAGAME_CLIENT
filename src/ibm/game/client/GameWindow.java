@@ -252,11 +252,10 @@ public class GameWindow extends JFrame implements ActionListener {
 		}
 
 		if (upKey.isPressed()) {
-			
-			
+
 			cmd += "MOVE:" + gameClientHandler.game.getGameid() + ":" + "38"
 					+ "\r\n";
-			
+
 			upKey.setPressed(false);
 
 		}
@@ -271,8 +270,6 @@ public class GameWindow extends JFrame implements ActionListener {
 		}
 
 		if (downKey.isPressed()) {
-
-			
 
 			cmd += "MOVE:" + gameClientHandler.game.getGameid() + ":" + "40"
 					+ "\r\n";
@@ -340,14 +337,9 @@ public class GameWindow extends JFrame implements ActionListener {
 				+ gameClientHandler.game.getGameid());
 
 		repaint();
-		
-		
-		String msg = "SIZE:" + dim.width + "," + dim.height+ "\n";
+
+		String msg = "SIZE:" + dim.width + "," + dim.height + "\n";
 		channel.writeAndFlush(msg);
-		
-		
-		
-		
 
 	}
 
@@ -391,8 +383,7 @@ public class GameWindow extends JFrame implements ActionListener {
 		String msg = gameClientHandler.game.getEndMsg();
 
 		JOptionPane.showMessageDialog(this, msg);
-        
-	
+
 		System.exit(0);
 
 	}

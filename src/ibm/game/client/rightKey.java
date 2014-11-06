@@ -11,8 +11,4 @@ public class rightKey {
 		rightKey.pressed = pressed;
 	}
 
-	
-	
-	
-
 }

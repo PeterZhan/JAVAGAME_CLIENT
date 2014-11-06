@@ -11,8 +11,4 @@ public class downKey {
 		downKey.pressed = pressed;
 	}
 
-	
-	
-	
-
 }

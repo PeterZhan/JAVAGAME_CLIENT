@@ -17,8 +17,7 @@ public class AGameSession {
 	public static int ID;
 
 	public static String[] namelist = new String[0];
-	
-	
+
 	public static boolean GotGames = false;
 
 	private int width;
@@ -28,67 +27,68 @@ public class AGameSession {
 	private int y;
 
 	private int angle = 0;
-	
-	
+
 	private int x2;
 	private int y2;
-	
+
 	private int angle2 = 180;
 	
-		
+	private int speed1 = 3;
+	private int speed2 = 3;
+
+	public synchronized int getSpeed2() {
+		return speed2;
+	}
+
+	public synchronized void setSpeed2(int speed2) {
+		this.speed2 = speed2;
+	}
+
+	public synchronized int getSpeed1() {
+		return speed1;
+	}
+
+	public synchronized void setSpeed1(int speed) {
+		this.speed1 = speed;
+	}
+
 	String endMsg = "You win!";
-	
+
 	private ArrayList<fireInfo> fires = new ArrayList();
-	
-	
+
 	public static AudioStream laserGun = null;
-	
-	public synchronized void addNewFireInfo(fireInfo fi)
-	{
-		fires.add(fi);	
-		
+
+	public synchronized void addNewFireInfo(fireInfo fi) {
+		fires.add(fi);
+
 	}
-	public synchronized int getCountFires()
-	{
-		
-		
+
+	public synchronized int getCountFires() {
+
 		return fires.size();
-		
-		
+
 	}
-	
-	public synchronized void removeAllZeros()
-	{
-		
+
+	public synchronized void removeAllZeros() {
+
 		Iterator<fireInfo> iterator = fires.iterator();
-		
-		while(iterator.hasNext())
-		{
+
+		while (iterator.hasNext()) {
 			fireInfo fi = iterator.next();
-			
+
 			if (fi.time == 0)
 				iterator.remove();
-			
-			
-			
+
 		}
-		
-		
-		
-		
+
 	}
-	
-	public synchronized fireInfo getNthFire(int i)
-	{
-		
-		
+
+	public synchronized fireInfo getNthFire(int i) {
+
 		return fires.get(i);
-		
-		
+
 	}
-	
-	
-	
+
 	public synchronized String getEndMsg() {
 		return endMsg;
 	}
@@ -115,9 +115,9 @@ public class AGameSession {
 
 	private int fule1 = 30;
 	private int fule2 = 30;
-	
+
 	final static int MaxDiv = 36;
-	
+
 	public synchronized Image getImgTank() {
 		return imgTank;
 	}
@@ -136,10 +136,9 @@ public class AGameSession {
 
 	public BufferedImage[] tanks = new BufferedImage[MaxDiv];
 	public Image imgTank = null;// this.getToolkit().getImage("./resources/tank0.jpg");
-    public Image imgTank2 = null;
-    public static Image imgExp = null;//ImageIO.read(new File("./resources/exploded.png"));
-
-
+	public Image imgTank2 = null;
+	public static Image imgExp = null;// ImageIO.read(new
+										// File("./resources/exploded.png"));
 
 	public synchronized int getX2() {
 		return x2;
@@ -229,37 +228,27 @@ public class AGameSession {
 	}
 
 	public AGameSession() {
-		
-		
+
 		try {
-		for (int i = 0; i < MaxDiv; i++) {
-			
+			for (int i = 0; i < MaxDiv; i++) {
+
 				tanks[i] = ImageIO.read(new File("./resources/tank" + i
 						+ ".png"));
-			
 
-		}
-		
-		        imgExp = ImageIO.read(new File("./resources/exploded.png"));
-		        
-		        
-		        
-		        
-		
+			}
+
+			imgExp = ImageIO.read(new File("./resources/exploded.png"));
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
-		
-		
 
 	}
 
 	public synchronized void setGameid(String gameid) {
 		this.gameid = gameid;
 	}
-	
+
 	public synchronized void getTankImageForMain() {
 
 		int angle = gameClientHandler.game.getAngle();
@@ -267,29 +256,25 @@ public class AGameSession {
 		if (i < 0)
 			i += 36;
 		imgTank = tanks[i];
-	
-		
-	
+
 	}
-	
+
 	public synchronized void getTankImageForSec() {
-		
+
 		int angle = gameClientHandler.game.getAngle2();
 		int i = angle % 360 / 10;
 		if (i < 0)
 			i += 36;
-		imgTank2 = tanks[i]; 
+		imgTank2 = tanks[i];
 
 	}
+
 	public static synchronized boolean isGotGames() {
 		return GotGames;
 	}
+
 	public static synchronized void setGotGames(boolean gotGames) {
 		GotGames = gotGames;
 	}
-	
-	
-	
-	
 
 }

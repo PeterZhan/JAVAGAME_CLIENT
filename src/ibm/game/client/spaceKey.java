@@ -11,8 +11,4 @@ public class spaceKey {
 		spaceKey.pressed = pressed;
 	}
 
-	
-	
-	
-
 }

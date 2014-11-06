@@ -19,24 +19,17 @@ public class DlgList extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	JComboBox gameList = null;
-	String gameid= null;
+	String gameid = null;
 
 	/**
 	 * Launch the application.
 	 */
 	/*
-	public static void main(String[] args) {
-		try {
-			DlgList dialog = new DlgList();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-*/
+	 * public static void main(String[] args) { try { DlgList dialog = new
+	 * DlgList(); dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+	 * dialog.setVisible(true); } catch (Exception e) { e.printStackTrace(); } }
+	 */
 	public void putAllGames() {
-		
 
 	}
 
@@ -60,8 +53,8 @@ public class DlgList extends JDialog {
 				gameList = new JComboBox(AGameSession.namelist);
 				contentPanel.add(gameList);
 
-			 }
-			
+			}
+
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -71,9 +64,9 @@ public class DlgList extends JDialog {
 				JButton okButton = new JButton("Select");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-						gameid = (String)gameList.getSelectedItem();
+						gameid = (String) gameList.getSelectedItem();
 						setVisible(false);
-						
+
 					}
 				});
 				okButton.setActionCommand("OK");
