@@ -21,6 +21,10 @@ import javax.swing.JList;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JLabel;
+import javax.swing.JTextPane;
+import java.awt.Panel;
+import javax.swing.SwingConstants;
 
 public class DlgMain extends JDialog implements ActionListener {
 
@@ -43,37 +47,75 @@ public class DlgMain extends JDialog implements ActionListener {
 	 * Create the dialog.
 	 */
 
-	
-	 public DlgMain() { super();
-	 
-	
-	 }
-	
+	/*public DlgMain() {
+		super();
+		
+		
+
+	}*/
+
 	public DlgMain(JFrame owner, boolean modal) {
 		super(owner, modal);
-		setBounds(100, 100, 450, 185);
+		setTitle("Laser-War Game");
+		setBounds(100, 100, 613, 239);
 
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(new FlowLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		ButtonGroup group = new ButtonGroup();
+		
+				JRadioButton rdbtnStartANew = new JRadioButton("start a new game");
+				contentPanel.add(rdbtnStartANew);
+				rdbtnStartANew.setActionCommand("NEW");
+				rdbtnStartANew.addActionListener(this);
+				rdbtnStartANew.setSelected(true);
+				group.add(rdbtnStartANew);
+				
+				if (AGameSession.namelist.length > 0) {
+					JRadioButton rdbtnJoinAnExisting = new JRadioButton(
+							"join an existing game");
+					rdbtnJoinAnExisting.setActionCommand("JOIN");
+					rdbtnJoinAnExisting.addActionListener(this);
+					contentPanel.add(rdbtnJoinAnExisting);
+					group.add(rdbtnJoinAnExisting);
+				}		
+				
+				
+				
+		
+		JPanel panel_2 = new JPanel();
+		contentPanel.add(panel_2);
+		
+		JLabel lblPictureDownloadedFrom = new JLabel("The background picture from  http://pixabay.com/en/hubble-space-telescope-atmosphere-89464/");
+		panel_2.add(lblPictureDownloadedFrom);
+		
+		JLabel lblHttppixabaycomenspaceshipspacetravel = new JLabel("The spaceship picture from http://pixabay.com/en/space-ship-space-travel-148536/");
+		contentPanel.add(lblHttppixabaycomenspaceshipspacetravel);
+		
+		JLabel lblAuthorHongliangZhang = new JLabel("Sound files from http://soundcli.ps/browse/laser");
+		contentPanel.add(lblAuthorHongliangZhang);
+		
+		JPanel panel = new JPanel();
+		FlowLayout flowLayout = (FlowLayout) panel.getLayout();
+		flowLayout.setAlignment(FlowLayout.LEFT);
+		contentPanel.add(panel);
+		
+		JPanel panel_1 = new JPanel();
+		contentPanel.add(panel_1);
+		
+		JLabel label = new JLabel("Author: Hongliang Zhang ");
+		panel_1.add(label);
+		
+		JLabel label_1 = new JLabel("at Lambton College in Fall 2014");
+		panel_1.add(label_1);
+		label_1.setVerticalAlignment(SwingConstants.BOTTOM);
+		
+		
+		
+		
 
-		JRadioButton rdbtnStartANew = new JRadioButton("start a new game");
-		rdbtnStartANew.setActionCommand("NEW");
-		rdbtnStartANew.addActionListener(this);
-		rdbtnStartANew.setSelected(true);
-		contentPanel.add(rdbtnStartANew);
-		group.add(rdbtnStartANew);
-
-		if (AGameSession.namelist.length > 0) {
-			JRadioButton rdbtnJoinAnExisting = new JRadioButton(
-					"join an existing game");
-			rdbtnJoinAnExisting.setActionCommand("JOIN");
-			rdbtnJoinAnExisting.addActionListener(this);
-			contentPanel.add(rdbtnJoinAnExisting);
-			group.add(rdbtnJoinAnExisting);
-		}
+		
 
 		JPanel buttonPane = new JPanel();
 		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
