@@ -127,6 +127,18 @@ public class PanelGame extends JPanel implements KeyListener {
 		
 		
 		g.drawString("" + gameClientHandler.game.getSpeed1(), x, y + 60);
+		
+		if (gameClientHandler.game.getSpeed1() > 0)
+		{
+		    g.fillRect(x + 10, y + 50, gameClientHandler.game.getSpeed1()*3, 2);
+		}else
+		{
+			
+			g.fillRect(x - 5 + gameClientHandler.game.getSpeed1()*3, y + 50, -gameClientHandler.game.getSpeed1()*3, 2);	
+			
+			
+		}
+		
 
 		if (gameClientHandler.game.ID == 2
 				|| (gameClientHandler.game.ID == 1 && gameClientHandler.game
@@ -147,6 +159,21 @@ public class PanelGame extends JPanel implements KeyListener {
 					gameClientHandler.game.getFule2());
 			
 			g.drawString("" + gameClientHandler.game.getSpeed2(), x2, y2 + 60);
+			
+			
+			if (gameClientHandler.game.getSpeed2() > 0)
+			{
+			    g.fillRect(x2 + 10, y2 + 50, gameClientHandler.game.getSpeed2()*3, 2);
+			}else
+			{
+				
+				g.fillRect(x2 - 5 + gameClientHandler.game.getSpeed2()*3, y2 + 50, -gameClientHandler.game.getSpeed2()*3, 2);	
+				
+				
+			}
+			
+			
+			
 
 		}
 

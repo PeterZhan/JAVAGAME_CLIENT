@@ -43,12 +43,12 @@ public class DlgMain extends JDialog implements ActionListener {
 	 * Create the dialog.
 	 */
 
-	/*
-	 * public DlgMain() { super();
-	 * 
-	 * 
-	 * }
-	 */
+	
+	 public DlgMain() { super();
+	 
+	
+	 }
+	
 	public DlgMain(JFrame owner, boolean modal) {
 		super(owner, modal);
 		setBounds(100, 100, 450, 185);

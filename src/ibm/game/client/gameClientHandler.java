@@ -200,6 +200,7 @@ public class gameClientHandler extends SimpleChannelInboundHandler<String>
 			EventQueue.invokeLater(this);
 
 			if (score <= 0) {
+				 
 
 				if (part == 1) {
 					game.setImgTank(game.imgExp);
@@ -226,6 +227,35 @@ public class gameClientHandler extends SimpleChannelInboundHandler<String>
 
 			break;
 
+		case "SPEED":
+			
+
+			part = Integer.parseInt(msgs[2]);
+			int speed = Integer.parseInt(msgs[1]);
+
+			if (part == 1) {
+				game.setSpeed1(speed);
+
+			}
+
+			if (part == 2) {
+				game.setSpeed2(speed);
+
+			}
+
+			EventQueue.invokeLater(this);/*
+										 * EventQueue.invokeLater(new Runnable()
+										 * { public void run() { gw.repaint(); }
+										 * });
+										 */
+
+			break;
+			
+			
+			
+		
+			
+			
 		default:
 			;
 

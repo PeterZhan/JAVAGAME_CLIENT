@@ -9,6 +9,7 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
@@ -381,9 +382,15 @@ public class GameWindow extends JFrame implements ActionListener {
 		}
 
 		String msg = gameClientHandler.game.getEndMsg();
-
+   /*
+		endDlg dlg = new endDlg();
+		dlg.setModal(true);
+		dlg.getContentPane().add(new JLabel(msg));
+        dlg.setVisible(true);
+        
+        */
+		
 		JOptionPane.showMessageDialog(this, msg);
-
 		System.exit(0);
 
 	}
